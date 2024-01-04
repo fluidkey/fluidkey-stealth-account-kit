@@ -1,0 +1,18 @@
+{
+  "name": "fluidkey-trust-kit",
+  "version": "0.0.1",
+  "description": "An open source repository of all core cryptographic functions used by Fluidkey’s interface and SDK.",
+  "main": "index.js",
+  "repository": "https://github.com/fluidkey/fluidkey-trust-kit",
+  "author": "Fluid Privacy SA",
+  "license": "MIT",
+  "dependencies": {
+    "@noble/secp256k1": "^2.0.0",
+    "@safe-global/safe-deployments": "^1.29.0",
+    "assert": "^2.1.0",
+    "viem": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6"
+  }
+}
