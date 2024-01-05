@@ -10,8 +10,10 @@ import assert from 'assert';
 
 /**
  * Using Viem transaction simulation, predict a new Safe address using the parameters passed in input
- * @param params {PredictSafeParams}
- * @return {Promise<Safe>} the predicted Safe (not deployed)
+ * @param chainId
+ * @param threshold
+ * @param stealthAddresses
+ * @return Promise<{ stealthSafeAddress }> the predicted Safe address (not deployed)
  */
 
 export async function predictStealthSafeAddress({

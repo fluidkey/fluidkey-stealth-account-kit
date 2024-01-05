@@ -14,7 +14,7 @@ export function generateKeysFromSignature(signature: `0x${string}`): {
   viewingPrivateKey: `0x${string}`;
 } {
   // Verify that the signature is valid
-  assert(isHex(signature) && signature.length === 132, 'Signature is not a valid hex string.');
+  assert(isHex(signature) && signature.length === 132, 'Signature is not valid.');
 
   // Split hex string signature into two 32 byte chunks
   const startIndex = 2; // first two characters are 0x, so skip these

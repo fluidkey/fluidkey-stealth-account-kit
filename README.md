@@ -11,6 +11,8 @@ Dependencies
   - [noble-hashes](https://github.com/paulmillr/noble-hashes)
   - [scure-bip32](https://github.com/paulmillr/scure-bip32)
 - [noble-secp256k1](https://github.com/paulmillr/noble-secp256k1)
+- [safe-deployments](https://github.com/safe-global/safe-deployments)
+
 
 Credits
 -------
