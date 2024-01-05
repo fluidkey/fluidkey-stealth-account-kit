@@ -3,7 +3,7 @@ import { HDKey } from 'viem/accounts';
 import assert from 'assert';
 
 /**
- * Generate an ephemeral secret based on a private viewing key node, a nonce, and a chainId or coinType.
+ * Generate an ephemeral private key based on a private viewing key node, a nonce, and a chainId or coinType.
  * @param viewingPrivateKeyNode
  * @param nonce
  * @param chainId
@@ -11,7 +11,7 @@ import assert from 'assert';
  * @returns ephemeralPrivateKey
  */
 
-export function generateEphemeralSecret({
+export function generateEphemeralPrivateKey({
   viewingPrivateKeyNode,
   nonce,
   chainId,
