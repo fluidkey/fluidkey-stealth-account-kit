@@ -40,7 +40,7 @@ const project = new typescript.TypeScriptProject({
   jestOptions: {
     jestConfig: {
       collectCoverage: true,
-      coverageReporters: ['json-summary', 'text', 'lcov', 'clover'],
+      coverageReporters: ['json-summary', 'lcov'],
     },
   },
 

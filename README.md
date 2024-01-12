@@ -1,4 +1,7 @@
 ![Coverage:branches](./coverage/badge-branches.svg)
+![Coverage:functions](./coverage/badge-functions.svg)
+![Coverage:lines](./coverage/badge-lines.svg)
+![Coverage:statements](./coverage/badge-statements.svg)
 
 The Fluidkey Trust Kit is an open source repository of the core cryptographic functions used by Fluidkey’s interface and SDK. It enables anyone to independently generate and recover Fluidkey stealth smart accounts and related funds. 
 
