@@ -29,11 +29,11 @@
   "include": [
     "src/**/*.ts",
     "test/**/*.ts",
-    "example/**/*",
     ".projenrc.ts",
     "projenrc/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "example/**/*"
   ]
 }

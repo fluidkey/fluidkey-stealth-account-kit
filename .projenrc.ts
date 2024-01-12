@@ -24,7 +24,7 @@ const project = new typescript.TypeScriptProject({
     'viem@1.21.4',
   ],
   tsconfig: {
-    include: [
+    exclude: [
       'example/**/*',
     ],
     compilerOptions: {

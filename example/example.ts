@@ -90,6 +90,8 @@ WARNING: Only sign this message within a trusted website or platform to avoid lo
 
 Secret: c0bd24706c958efa41b1e470838288dbd617a30930c974e403e386e4434648ac`,
     chainId: 5,
+    startNonce: 10,
+    endNonce: 30,
   });
 
   console.log(results);
