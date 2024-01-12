@@ -42,7 +42,7 @@
       "type": "build"
     },
     {
-      "name": "jest-coverage-badges-ng",
+      "name": "jest-coverage-badges",
       "type": "build"
     },
     {

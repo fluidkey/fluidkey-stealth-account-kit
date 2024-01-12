@@ -25,7 +25,7 @@ const project = new typescript.TypeScriptProject({
     'viem@1.21.4',
   ],
   devDeps: [
-    'jest-coverage-badges-ng',
+    'jest-coverage-badges',
   ],
   tsconfig: {
     exclude: [
@@ -42,8 +42,10 @@ const project = new typescript.TypeScriptProject({
       collectCoverage: true,
       coverageReporters: ['json-summary', 'lcov'],
     },
+    extraCliOptions: [
+      '&& jest-coverage-badges --input ./coverage/coverage-summary.json',
+    ],
   },
-
 });
 
 project.gitignore.include('coverage');

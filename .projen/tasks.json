@@ -180,7 +180,7 @@
       "description": "Run tests",
       "steps": [
         {
-          "exec": "jest --passWithNoTests --updateSnapshot",
+          "exec": "jest --passWithNoTests && jest-coverage-badges --input ./coverage/coverage-summary.json --updateSnapshot",
           "receiveArgs": true
         },
         {
