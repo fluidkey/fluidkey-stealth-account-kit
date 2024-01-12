@@ -3,6 +3,7 @@ import { type HDKey } from 'viem/accounts';
 
 /**
  * Generate an ephemeral private key based on a private viewing key node, a nonce, and a chainId or coinType.
+ *
  * @param viewingPrivateKeyNode
  * @param nonce
  * @param chainId
