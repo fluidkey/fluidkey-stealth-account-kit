@@ -43,7 +43,7 @@ const project = new typescript.TypeScriptProject({
       coverageReporters: ['json-summary', 'lcov'],
     },
     extraCliOptions: [
-      '&& istanbul-badges-readme',
+      '&& istanbul-badges-readme ',
     ],
   },
 });
