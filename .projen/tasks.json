@@ -180,7 +180,7 @@
       "description": "Run tests",
       "steps": [
         {
-          "exec": "jest --passWithNoTests && istanbul-badges-readme --style=\"colorA=f6f8fa&colorB=f6f8fa&style=flat\" --updateSnapshot",
+          "exec": "jest --passWithNoTests && istanbul-badges-readme  --updateSnapshot",
           "receiveArgs": true
         },
         {
