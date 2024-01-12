@@ -17,7 +17,6 @@ Dependencies
 - [noble-secp256k1](https://github.com/paulmillr/noble-secp256k1)
 - [safe-deployments](https://github.com/safe-global/safe-deployments)
 
-
 Credits
 -------
 This code has been influenced by, and contains code from [umbra-js](https://github.com/ScopeLift/umbra-protocol)
