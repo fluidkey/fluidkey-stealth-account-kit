@@ -59,7 +59,6 @@ export async function example({
       nonce,
       chainId,
     });
-    console.log(ephemeralPrivateKey);
 
     // Generate the stealth owner address
     const { stealthAddresses } = generateStealthAddresses({
