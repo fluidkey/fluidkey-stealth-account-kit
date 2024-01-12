@@ -29,7 +29,6 @@ Test Coverage
 ![Functions](https://img.shields.io/badge/functions-100%25-brightgreen.svg?style=flat)
 ![Lines](https://img.shields.io/badge/lines-100%25-brightgreen.svg?style=flat)
 
----------------------------------|---------|----------|---------|---------|-------------------
 File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ---------------------------------|---------|----------|---------|---------|-------------------
 All files                        |     100 |      100 |     100 |     100 |                   
@@ -38,10 +37,9 @@ All files                        |     100 |      100 |     100 |     100 |
  generateKeysFromSignature.ts    |     100 |      100 |     100 |     100 |                   
  generateStealthAddresses.ts     |     100 |      100 |     100 |     100 |                   
  predictStealthSafeAddress.ts    |     100 |      100 |     100 |     100 |                   
----------------------------------|---------|----------|---------|---------|-------------------
 
 Test Suites: 5 passed, 5 total
-Tests:       12 passed, 12 total
+Tests: 12 passed, 12 total
 
 License
 -------
