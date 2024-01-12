@@ -24,6 +24,9 @@ const project = new typescript.TypeScriptProject({
     '@safe-global/safe-deployments@1.29.0',
     'viem@1.21.4',
   ],
+  devDeps: [
+    'jest-coverage-badges-ng',
+  ],
   tsconfig: {
     exclude: [
       'example/**/*',
@@ -34,8 +37,13 @@ const project = new typescript.TypeScriptProject({
       ],
     },
   },
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: /* Build dependencies for this module. */,
-  // packageName: undefined,  /* The "name" in package.json. */
+  jestOptions: {
+    jestConfig: {
+      collectCoverage: true,
+      coverageReporters: ['json-summary', 'text', 'lcov', 'clover'],
+    },
+  },
+
 });
+
 project.synth();

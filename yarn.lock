@@ -2859,6 +2859,13 @@ jest-config@^29.7.0:
     slash "^3.0.0"
     strip-json-comments "^3.1.1"
 
+jest-coverage-badges-ng@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/jest-coverage-badges-ng/-/jest-coverage-badges-ng-1.0.1.tgz#fd68e8ab1a3d328f5db5154e580299e3f68e3566"
+  integrity sha512-l+qCMilL23mSa/95JTHjCH6tOOoIbOZ0m3GroY3/q6igATglqQVolJtKeFkNpcFGnaBGnkvFRuf7XvZLZ8GH5g==
+  dependencies:
+    mkdirp "2.1.6"
+
 jest-diff@^29.7.0:
   version "29.7.0"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-29.7.0.tgz#017934a66ebb7ecf6f205e84699be10afd70458a"
@@ -3436,6 +3443,11 @@ minimist@^1.2.0, minimist@^1.2.3, minimist@^1.2.5, minimist@^1.2.6:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
+
+mkdirp@2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-2.1.6.tgz#964fbcb12b2d8c5d6fbc62a963ac95a273e2cc19"
+  integrity sha512-+hEnITedc8LAtIP9u3HJDFIdcLV2vXP33sqLLIzkv1Db1zO/1OxbvYf0Y1OC/S/Qo5dxHXepofhmxL02PsKe+A==
 
 mkdirp@^1.0.4:
   version "1.0.4"

@@ -42,6 +42,10 @@
       "type": "build"
     },
     {
+      "name": "jest-coverage-badges-ng",
+      "type": "build"
+    },
+    {
       "name": "jest-junit",
       "version": "^15",
       "type": "build"
