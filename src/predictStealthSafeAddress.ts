@@ -12,16 +12,19 @@ import * as chains from 'viem/chains';
  * @param chainId
  * @param threshold
  * @param stealthAddresses
+ * @param transport (optional) a custom viem transport to use for the simulation
  * @return Promise<{ stealthSafeAddress }> the predicted Safe address (not deployed)
  */
 export async function predictStealthSafeAddress({
   chainId,
   threshold,
   stealthAddresses,
+  transport,
 }: {
   chainId: number;
   threshold: number;
   stealthAddresses: string[];
+  transport?: any;
 }): Promise<{ stealthSafeAddress: `0x${string}` }> {
   // Constants
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
@@ -82,7 +85,7 @@ export async function predictStealthSafeAddress({
   // Create a viem client to simulate the transaction
   const client = createPublicClient({
     chain: selectedChain,
-    transport: http(),
+    transport: http(transport),
   });
 
   // Simulate the transaction
