@@ -41,7 +41,7 @@ export async function predictStealthSafeAddress({
   // get the fallback handler
   const fallbackHandler = getFallbackHandlerDeployment(configuration);
 
-  if (!proxyFactory || !safeSingleton || !fallbackHandler) {
+  if (proxyFactory == null || safeSingleton == null || fallbackHandler == null) {
     throw new Error('No safe contracts found for this configuration.');
   }
 
@@ -56,7 +56,7 @@ export async function predictStealthSafeAddress({
       '0x', // empty data
       fallbackHandler.defaultAddress,
       ZERO_ADDRESS, // payment token
-      0, //payment amount
+      0, // payment amount
       ZERO_ADDRESS, // payment receiver
     ],
   });

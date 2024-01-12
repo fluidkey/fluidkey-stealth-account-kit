@@ -1,8 +1,11 @@
 import { HDKey } from 'viem/accounts';
 import { extractPrivateViewingKeyNode } from '../src/extractPrivateViewingKeyNode';
-import { PRIVATE_VIEWING_KEY_UINT8 } from './constants';
 
 describe('extractPrivateViewingKeyNode', () => {
+  const privateViewingKey = new Uint8Array([
+    227, 119, 5, 156, 15, 125, 89, 79, 149, 54, 114, 217, 151, 6, 16, 158, 246, 155, 144, 68, 166,
+    208, 9, 218, 246, 227, 6, 110, 23, 157, 212, 45,
+  ]);
   const expectedDepth = 2;
   const expectedIndex = 2147483648;
   const expectedChainCode = Array.from([
@@ -21,7 +24,7 @@ describe('extractPrivateViewingKeyNode', () => {
   ]);
 
   it('should generate the correct HDKey from a given private viewing key and node', () => {
-    const result = extractPrivateViewingKeyNode(PRIVATE_VIEWING_KEY_UINT8, 0);
+    const result = extractPrivateViewingKeyNode(privateViewingKey, 0);
 
     // Check that the result is an instance of HDKey
     expect(result).toBeInstanceOf(HDKey);
@@ -29,15 +32,15 @@ describe('extractPrivateViewingKeyNode', () => {
     // Check that the result has the correct properties
     expect(result.depth).toEqual(expectedDepth);
     expect(result.index).toEqual(expectedIndex);
-    expect(Array.from(result.chainCode as Uint8Array)).toEqual(expectedChainCode);
+    expect(Array.from(result.chainCode!)).toEqual(expectedChainCode);
     expect(result.parentFingerprint).toEqual(expectedParentFingerprint);
     expect(result.versions).toEqual(expectedVersions);
-    expect(Array.from(result.privateKey as Uint8Array)).toEqual(expectedPrivateKey);
-    expect(Array.from(result.publicKey as Uint8Array)).toEqual(expectedPublicKey);
+    expect(Array.from(result.privateKey!)).toEqual(expectedPrivateKey);
+    expect(Array.from(result.publicKey!)).toEqual(expectedPublicKey);
   });
 
   it('should use a default node of 0 if no node is provided', () => {
-    const result = extractPrivateViewingKeyNode(PRIVATE_VIEWING_KEY_UINT8);
+    const result = extractPrivateViewingKeyNode(privateViewingKey);
 
     // Check that the result is an instance of HDKey
     expect(result).toBeInstanceOf(HDKey);
@@ -45,10 +48,10 @@ describe('extractPrivateViewingKeyNode', () => {
     // Check that the result has the correct properties
     expect(result.depth).toEqual(expectedDepth);
     expect(result.index).toEqual(expectedIndex);
-    expect(Array.from(result.chainCode as Uint8Array)).toEqual(expectedChainCode);
+    expect(Array.from(result.chainCode!)).toEqual(expectedChainCode);
     expect(result.parentFingerprint).toEqual(expectedParentFingerprint);
     expect(result.versions).toEqual(expectedVersions);
-    expect(Array.from(result.privateKey as Uint8Array)).toEqual(expectedPrivateKey);
-    expect(Array.from(result.publicKey as Uint8Array)).toEqual(expectedPublicKey);
+    expect(Array.from(result.privateKey!)).toEqual(expectedPrivateKey);
+    expect(Array.from(result.publicKey!)).toEqual(expectedPublicKey);
   });
 });

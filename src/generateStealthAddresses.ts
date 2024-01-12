@@ -23,8 +23,8 @@ export function generateStealthAddresses({
       false
     );
     const hashedSharedSecret = keccak256(toHex(sharedSecret.slice(1)));
-    const R_pubkey_spend = secp.Point.fromHex(spendingPublicKey.slice(2));
-    const stealthPublicKey = R_pubkey_spend.multiply(BigInt(hashedSharedSecret));
+    const rPubkeySpend = secp.Point.fromHex(spendingPublicKey.slice(2));
+    const stealthPublicKey = rPubkeySpend.multiply(BigInt(hashedSharedSecret));
     const stealthAddress =
       '0x' + keccak256(Buffer.from(stealthPublicKey.toHex(), 'hex').slice(1)).slice(-40);
     stealthAddresses.push(stealthAddress);
