@@ -11,7 +11,7 @@ import { HDKey } from 'viem/accounts';
 
 export function extractPrivateViewingKeyNode(
   privateViewingKey: Uint8Array,
-  node: number = 0
+  node: number = 0,
 ): HDKey {
   // generate the master HDKey from the private viewing key
   const hdkey = HDKey.fromMasterSeed(privateViewingKey);

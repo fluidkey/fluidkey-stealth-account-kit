@@ -1,4 +1,4 @@
-import { keccak256, isHex } from 'viem';
+import { isHex, keccak256 } from 'viem';
 
 /**
  * Generate private keys from the signature of a message.

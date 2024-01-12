@@ -24,6 +24,7 @@ export function generateEphemeralPrivateKey({
 }): { ephemeralPrivateKey: `0x${string}` } {
   // Convert the chainId to a coinType if no coinType was provided
   if (coinType == null && chainId != null) {
+    // eslint-disable-next-line no-bitwise
     coinType = (0x80000000 | chainId) >>> 0;
   }
 

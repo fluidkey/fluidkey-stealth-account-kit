@@ -1,11 +1,11 @@
 import {
+  getFallbackHandlerDeployment,
   getProxyFactoryDeployment,
   getSafeSingletonDeployment,
-  getFallbackHandlerDeployment,
 } from '@safe-global/safe-deployments';
-import { encodeFunctionData, createPublicClient, http } from 'viem';
-import * as chains from 'viem/chains';
+import { createPublicClient, encodeFunctionData, http } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
+import * as chains from 'viem/chains';
 
 /**
  * Using Viem transaction simulation, predict a new Safe address using the parameters passed in input
@@ -14,7 +14,6 @@ import { privateKeyToAccount } from 'viem/accounts';
  * @param stealthAddresses
  * @return Promise<{ stealthSafeAddress }> the predicted Safe address (not deployed)
  */
-
 export async function predictStealthSafeAddress({
   chainId,
   threshold,
@@ -89,7 +88,7 @@ export async function predictStealthSafeAddress({
   // Simulate the transaction
   const result = await client.call({
     account: privateKeyToAccount(
-      '0x1111111111111111111111111111111111111111111111111111111111111111'
+      '0x1111111111111111111111111111111111111111111111111111111111111111',
     ),
     data: txData,
     to: proxyFactory.defaultAddress as `0x${string}`,

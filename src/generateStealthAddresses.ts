@@ -25,7 +25,7 @@ export function generateStealthAddresses({
     const sharedSecret = secp.getSharedSecret(
       ephemeralPrivateKey.slice(2),
       spendingPublicKey.slice(2),
-      false
+      false,
     );
 
     // Hash the shared secret
