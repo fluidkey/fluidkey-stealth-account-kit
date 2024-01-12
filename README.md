@@ -1,7 +1,7 @@
-![Coverage:branches](./coverage/badge-branches.svg)
-![Coverage:functions](./coverage/badge-functions.svg)
-![Coverage:lines](./coverage/badge-lines.svg)
-![Coverage:statements](./coverage/badge-statements.svg)
+![Statements](https://img.shields.io/badge/statements-100%25-brightgreen.svg?style=flat)
+![Branches](https://img.shields.io/badge/branches-100%25-brightgreen.svg?style=flat)
+![Functions](https://img.shields.io/badge/functions-100%25-brightgreen.svg?style=flat)
+![Lines](https://img.shields.io/badge/lines-100%25-brightgreen.svg?style=flat)
 
 The Fluidkey Trust Kit is an open source repository of the core cryptographic functions used by Fluidkey’s interface and SDK. It enables anyone to independently generate and recover Fluidkey stealth smart accounts and related funds. 
 

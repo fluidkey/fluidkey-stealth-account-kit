@@ -38,11 +38,11 @@
       "type": "build"
     },
     {
-      "name": "jest",
+      "name": "istanbul-badges-readme",
       "type": "build"
     },
     {
-      "name": "jest-coverage-badges",
+      "name": "jest",
       "type": "build"
     },
     {

@@ -25,7 +25,7 @@ const project = new typescript.TypeScriptProject({
     'viem@1.21.4',
   ],
   devDeps: [
-    'jest-coverage-badges',
+    'istanbul-badges-readme',
   ],
   tsconfig: {
     exclude: [
@@ -43,7 +43,7 @@ const project = new typescript.TypeScriptProject({
       coverageReporters: ['json-summary', 'lcov'],
     },
     extraCliOptions: [
-      '&& jest-coverage-badges --input ./coverage/coverage-summary.json',
+      '&& istanbul-badges-readme',
     ],
   },
 });
