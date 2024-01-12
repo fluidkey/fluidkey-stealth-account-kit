@@ -1,12 +1,10 @@
-import secp from '@noble/secp256k1';
+import * as secp from '@noble/secp256k1';
 import { keccak256, toHex } from 'viem';
 
 /**
  * Generates a stealth address, with related ephemeralPubkey
  * @param params {GenerateStealthAddressParams}
  */
-
-// TO-DO: credit Umbra?
 
 export function generateStealthAddresses({
   spendingPublicKeys,
@@ -25,7 +23,7 @@ export function generateStealthAddresses({
       false
     );
     const hashedSharedSecret = keccak256(toHex(sharedSecret.slice(1)));
-    const R_pubkey_spend = secp.ProjectivePoint.fromHex(spendingPublicKey.slice(2)); // switched from Point to ProjectivePoint (v2 of secp256k1 package)
+    const R_pubkey_spend = secp.Point.fromHex(spendingPublicKey.slice(2));
     const stealthPublicKey = R_pubkey_spend.multiply(BigInt(hashedSharedSecret));
     const stealthAddress =
       '0x' + keccak256(Buffer.from(stealthPublicKey.toHex(), 'hex').slice(1)).slice(-40);

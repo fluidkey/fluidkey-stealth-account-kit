@@ -2,7 +2,7 @@ import assert from 'assert';
 import { keccak256, isHex } from 'viem';
 
 /**
- * Generate private keys from a message signature.
+ * Generate private keys from the signature of a message.
  *
  * This code is based on the logic and code from umbra-js (https://github.com/ScopeLift/umbra-protocol).
  * @param signature

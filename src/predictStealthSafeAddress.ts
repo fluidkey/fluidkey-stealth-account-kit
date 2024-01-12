@@ -3,10 +3,9 @@ import {
   getSafeSingletonDeployment,
   getFallbackHandlerDeployment,
 } from '@safe-global/safe-deployments';
-import { encodeFunctionData, AbiItem, createPublicClient, http } from 'viem';
+import { encodeFunctionData, createPublicClient, http } from 'viem';
 import * as chains from 'viem/chains';
 import { privateKeyToAccount } from 'viem/accounts';
-import assert from 'assert';
 
 /**
  * Using Viem transaction simulation, predict a new Safe address using the parameters passed in input
@@ -32,22 +31,30 @@ export async function predictStealthSafeAddress({
     version: SAFE_VERSION,
     released: true,
   };
+
   // get the ProxyFactory on current chain
   const proxyFactory = getProxyFactoryDeployment(configuration);
+
   // get the safe singleton on current chain
   const safeSingleton = getSafeSingletonDeployment(configuration);
+
   // get the fallback handler
   const fallbackHandler = getFallbackHandlerDeployment(configuration);
+
+  if (!proxyFactory || !safeSingleton || !fallbackHandler) {
+    throw new Error('No safe contracts found for this configuration.');
+  }
+
   // encode data for the initializer of the safeSingleton call
   const initializer = encodeFunctionData({
-    abi: safeSingleton?.abi as AbiItem[],
+    abi: safeSingleton.abi,
     functionName: 'setup',
     args: [
       stealthAddresses,
       threshold,
       ZERO_ADDRESS, // to
       '0x', // empty data
-      fallbackHandler?.defaultAddress,
+      fallbackHandler.defaultAddress,
       ZERO_ADDRESS, // payment token
       0, //payment amount
       ZERO_ADDRESS, // payment receiver
@@ -55,11 +62,10 @@ export async function predictStealthSafeAddress({
   });
   // encode the call vs the proxy factory to deploy the safe
   const txData = encodeFunctionData({
-    abi: proxyFactory?.abi as AbiItem[],
+    abi: proxyFactory.abi,
     functionName: 'createProxyWithNonce',
-    args: [safeSingleton?.defaultAddress, initializer, 0],
+    args: [safeSingleton.defaultAddress, initializer, 0],
   });
-  assert(!!proxyFactory?.defaultAddress, 'Missing proxy factory to deploy Safe');
 
   let selectedChain;
   for (const chain of Object.values(chains)) {
@@ -78,7 +84,7 @@ export async function predictStealthSafeAddress({
       '0x1111111111111111111111111111111111111111111111111111111111111111'
     ),
     data: txData,
-    to: proxyFactory?.defaultAddress as `0x${string}`,
+    to: proxyFactory.defaultAddress as `0x${string}`,
     gasPrice: BigInt(0),
   });
 
