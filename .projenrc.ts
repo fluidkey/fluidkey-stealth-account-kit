@@ -46,4 +46,6 @@ const project = new typescript.TypeScriptProject({
 
 });
 
+project.gitignore.include('coverage');
+
 project.synth();

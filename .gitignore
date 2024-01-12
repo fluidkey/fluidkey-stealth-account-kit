@@ -19,7 +19,6 @@ pids
 *.seed
 *.pid.lock
 lib-cov
-coverage
 *.lcov
 .nyc_output
 build/Release
@@ -49,4 +48,5 @@ junit.xml
 /lib
 /dist/
 !/.eslintrc.json
+!coverage
 !/.projenrc.ts
