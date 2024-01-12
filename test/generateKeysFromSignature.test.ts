@@ -7,10 +7,10 @@ describe('generateKeysFromSignature', () => {
     const { spendingPrivateKey, viewingPrivateKey } = generateKeysFromSignature(signature);
 
     expect(spendingPrivateKey).toEqual(
-      '0x641f9f8b285fa1d22b009ea8c947bb6d88129b320b729d98810b40b51e8572c7'
+      '0x641f9f8b285fa1d22b009ea8c947bb6d88129b320b729d98810b40b51e8572c7',
     );
     expect(viewingPrivateKey).toEqual(
-      '0x16988506fc3aa66bad0f3f231aa9552a1639b7c05477e6d59f8044adb3155322'
+      '0x16988506fc3aa66bad0f3f231aa9552a1639b7c05477e6d59f8044adb3155322',
     );
   });
 

@@ -79,7 +79,7 @@
     },
     {
       "name": "viem",
-      "version": "1.19.11",
+      "version": "1.21.4",
       "type": "runtime"
     }
   ],

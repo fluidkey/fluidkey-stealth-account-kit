@@ -1,5 +1,5 @@
-import { generateStealthAddresses } from '../src/generateStealthAddresses';
 import { privateKeyToAccount } from 'viem/accounts';
+import { generateStealthAddresses } from '../src/generateStealthAddresses';
 
 describe('generateStealthAddresses', () => {
   it('should generate the correct stealth addresses', () => {

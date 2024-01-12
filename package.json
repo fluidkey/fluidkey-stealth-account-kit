@@ -43,7 +43,7 @@
   "dependencies": {
     "@noble/secp256k1": "1.7.1",
     "@safe-global/safe-deployments": "1.29.0",
-    "viem": "1.19.11"
+    "viem": "1.21.4"
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",

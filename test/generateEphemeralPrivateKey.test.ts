@@ -1,5 +1,5 @@
-import { generateEphemeralPrivateKey } from '../src/generateEphemeralPrivateKey';
 import { extractPrivateViewingKeyNode } from '../src/extractPrivateViewingKeyNode';
+import { generateEphemeralPrivateKey } from '../src/generateEphemeralPrivateKey';
 
 describe('generateEphemeralPrivateKey', () => {
   const privateViewingKey = new Uint8Array([
@@ -17,7 +17,7 @@ describe('generateEphemeralPrivateKey', () => {
     });
 
     expect(ephemeralPrivateKey).toEqual(
-      '0xef01af02e46bea24d45e909d3c219cbc5122e1cafd13f914deea1237ea0b01a6'
+      '0xef01af02e46bea24d45e909d3c219cbc5122e1cafd13f914deea1237ea0b01a6',
     );
   });
 
@@ -31,7 +31,7 @@ describe('generateEphemeralPrivateKey', () => {
     });
 
     expect(ephemeralPrivateKey).toEqual(
-      '0x4f80725f967e22f2597e363f977bb563de45c5e22e9c3594ebc0de8bdccf8945'
+      '0x4f80725f967e22f2597e363f977bb563de45c5e22e9c3594ebc0de8bdccf8945',
     );
   });
 
@@ -42,7 +42,7 @@ describe('generateEphemeralPrivateKey', () => {
       generateEphemeralPrivateKey({
         viewingPrivateKeyNode,
         nonce: 0,
-      })
+      }),
     ).toThrow('coinType or chainId must be defined.');
   });
 });

@@ -36,7 +36,7 @@ describe('predictStealthSafeAddress', () => {
         chainId,
         threshold,
         stealthAddresses,
-      })
+      }),
     ).rejects.toThrow('No safe contracts found for this configuration.');
   });
 });
