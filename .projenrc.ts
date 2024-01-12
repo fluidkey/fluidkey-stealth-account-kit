@@ -24,6 +24,9 @@ const project = new typescript.TypeScriptProject({
     'viem@1.21.4',
   ],
   tsconfig: {
+    include: [
+      'example/**/*',
+    ],
     compilerOptions: {
       lib: [
         'es2019', 'dom',

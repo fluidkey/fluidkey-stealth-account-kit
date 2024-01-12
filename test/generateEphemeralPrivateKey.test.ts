@@ -1,14 +1,11 @@
-import { extractPrivateViewingKeyNode } from '../src/extractPrivateViewingKeyNode';
+import { extractViewingPrivateKeyNode } from '../src/extractViewingPrivateKeyNode';
 import { generateEphemeralPrivateKey } from '../src/generateEphemeralPrivateKey';
 
 describe('generateEphemeralPrivateKey', () => {
-  const privateViewingKey = new Uint8Array([
-    227, 119, 5, 156, 15, 125, 89, 79, 149, 54, 114, 217, 151, 6, 16, 158, 246, 155, 144, 68, 166,
-    208, 9, 218, 246, 227, 6, 110, 23, 157, 212, 45,
-  ]);
+  const privateViewingKey = '0xe377059c0f7d594f953672d99706109ef69b9044a6d009daf6e3066e179dd42d';
 
   it('should return the correct ephemeralPrivateKey with a low nonce', () => {
-    const viewingPrivateKeyNode = extractPrivateViewingKeyNode(privateViewingKey);
+    const viewingPrivateKeyNode = extractViewingPrivateKeyNode(privateViewingKey);
 
     const { ephemeralPrivateKey } = generateEphemeralPrivateKey({
       viewingPrivateKeyNode,
@@ -22,7 +19,7 @@ describe('generateEphemeralPrivateKey', () => {
   });
 
   it('should return the correct ephemeralPrivateKey with a nonce over 0x80000000', () => {
-    const viewingPrivateKeyNode = extractPrivateViewingKeyNode(privateViewingKey);
+    const viewingPrivateKeyNode = extractViewingPrivateKeyNode(privateViewingKey);
 
     const { ephemeralPrivateKey } = generateEphemeralPrivateKey({
       viewingPrivateKeyNode,
@@ -36,7 +33,7 @@ describe('generateEphemeralPrivateKey', () => {
   });
 
   it('should throw an error if no coinType or chainId is provided', () => {
-    const viewingPrivateKeyNode = extractPrivateViewingKeyNode(privateViewingKey);
+    const viewingPrivateKeyNode = extractViewingPrivateKeyNode(privateViewingKey);
 
     expect(() =>
       generateEphemeralPrivateKey({

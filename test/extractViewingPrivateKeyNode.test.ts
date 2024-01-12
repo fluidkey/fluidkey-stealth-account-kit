@@ -1,11 +1,8 @@
 import { HDKey } from 'viem/accounts';
-import { extractPrivateViewingKeyNode } from '../src/extractPrivateViewingKeyNode';
+import { extractViewingPrivateKeyNode } from '../src/extractViewingPrivateKeyNode';
 
 describe('extractPrivateViewingKeyNode', () => {
-  const privateViewingKey = new Uint8Array([
-    227, 119, 5, 156, 15, 125, 89, 79, 149, 54, 114, 217, 151, 6, 16, 158, 246, 155, 144, 68, 166,
-    208, 9, 218, 246, 227, 6, 110, 23, 157, 212, 45,
-  ]);
+  const privateViewingKey = '0xe377059c0f7d594f953672d99706109ef69b9044a6d009daf6e3066e179dd42d';
   const expectedDepth = 2;
   const expectedIndex = 2147483648;
   const expectedChainCode = Array.from([
@@ -24,7 +21,7 @@ describe('extractPrivateViewingKeyNode', () => {
   ]);
 
   it('should generate the correct HDKey from a given private viewing key and node', () => {
-    const result = extractPrivateViewingKeyNode(privateViewingKey, 0);
+    const result = extractViewingPrivateKeyNode(privateViewingKey, 0);
 
     // Check that the result is an instance of HDKey
     expect(result).toBeInstanceOf(HDKey);
@@ -40,7 +37,7 @@ describe('extractPrivateViewingKeyNode', () => {
   });
 
   it('should use a default node of 0 if no node is provided', () => {
-    const result = extractPrivateViewingKeyNode(privateViewingKey);
+    const result = extractViewingPrivateKeyNode(privateViewingKey);
 
     // Check that the result is an instance of HDKey
     expect(result).toBeInstanceOf(HDKey);
