@@ -15,6 +15,7 @@ import * as chains from 'viem/chains';
  * @param transport (optional) a custom viem transport to use for the simulation
  * @return Promise<{ stealthSafeAddress }> the predicted Safe address (not deployed)
  */
+
 export async function predictStealthSafeAddress({
   chainId,
   threshold,

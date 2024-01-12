@@ -22,9 +22,9 @@ export function extractViewingPrivateKeyNode(
   // Convert the private viewing key to Uint8Array
   const uint8PrivateViewingKey = toBytes(privateViewingKey);
 
-  // generate the master HDKey from the private viewing key
+  // Generate the master HDKey from the private viewing key
   const hdkey = HDKey.fromMasterSeed(uint8PrivateViewingKey);
 
-  // derive the node m/5564'/N to be shared with the server
+  // Derive the node m/5564'/N to be shared with the server
   return hdkey.derive(`m/5564'/${node}'`);
 }

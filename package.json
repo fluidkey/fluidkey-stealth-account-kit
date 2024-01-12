@@ -19,7 +19,7 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "Fluidkey",
+    "name": "Fluid Privacy SA",
     "email": "it@fluidkey.com",
     "organization": true
   },
@@ -46,7 +46,7 @@
     "viem": "1.21.4"
   },
   "main": "lib/index.js",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "version": "0.0.0",
   "jest": {
     "testMatch": [

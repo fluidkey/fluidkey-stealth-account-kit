@@ -51,4 +51,10 @@ describe('extractPrivateViewingKeyNode', () => {
     expect(Array.from(result.privateKey!)).toEqual(expectedPrivateKey);
     expect(Array.from(result.publicKey!)).toEqual(expectedPublicKey);
   });
+
+  it('should throw an error if the private viewing key is not a valid hex string', () => {
+    expect(() => extractViewingPrivateKeyNode('0xinvalid')).toThrow(
+      'Hex private viewing key is not valid.',
+    );
+  });
 });

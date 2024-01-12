@@ -7,9 +7,10 @@ const project = new typescript.TypeScriptProject({
 
   // github
   github: true,
-  authorName: 'Fluidkey',
+  authorName: 'Fluid Privacy SA',
   authorEmail: 'it@fluidkey.com',
   gitignore: ['.idea/', '.env', '.yalc'],
+  license: 'MIT',
 
   // NPMjs Configuration
   authorOrganization: true,
