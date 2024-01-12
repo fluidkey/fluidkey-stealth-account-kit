@@ -1,5 +1,13 @@
 {
   "tasks": {
+    "badges": {
+      "name": "badges",
+      "steps": [
+        {
+          "exec": "istanbul-badges-readme"
+        }
+      ]
+    },
     "build": {
       "name": "build",
       "description": "Full release build",
@@ -180,7 +188,7 @@
       "description": "Run tests",
       "steps": [
         {
-          "exec": "jest --passWithNoTests && istanbul-badges-readme  --updateSnapshot",
+          "exec": "jest --passWithNoTests --updateSnapshot",
           "receiveArgs": true
         },
         {

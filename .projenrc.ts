@@ -42,12 +42,10 @@ const project = new typescript.TypeScriptProject({
       collectCoverage: true,
       coverageReporters: ['json-summary', 'lcov'],
     },
-    extraCliOptions: [
-      '&& istanbul-badges-readme ',
-    ],
+  },
+  scripts: {
+    badges: 'istanbul-badges-readme',
   },
 });
-
-project.gitignore.include('coverage');
 
 project.synth();

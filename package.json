@@ -1,6 +1,7 @@
 {
   "name": "@fluidkey/trust-kit",
   "scripts": {
+    "badges": "npx projen badges",
     "build": "npx projen build",
     "bump": "npx projen bump",
     "clobber": "npx projen clobber",
