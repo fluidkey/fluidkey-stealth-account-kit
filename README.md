@@ -21,7 +21,7 @@ Credits
 -------
 This code has been influenced by, and contains code from [umbra-js](https://github.com/ScopeLift/umbra-protocol)
 
-Test Coverage
+Coverage
 -------------
 ![Statements](https://img.shields.io/badge/statements-100%25-brightgreen.svg?style=flat)
 ![Branches](https://img.shields.io/badge/branches-100%25-brightgreen.svg?style=flat)
