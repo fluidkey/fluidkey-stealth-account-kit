@@ -32,12 +32,12 @@ export function generateStealthAddresses({
     const hashedSharedSecret = keccak256(toHex(sharedSecret.slice(1)));
 
     // Convert the spending public key from hex to a point on the elliptic curve
-    const rPubkeySpend = secp.Point.fromHex(spendingPublicKey.slice(2));
+    const spendingPublicKeyPoint = secp.Point.fromHex(spendingPublicKey.slice(2));
 
     // Multiply the public key point by the hashed shared secret to get the stealth public key
-    const stealthPublicKey = rPubkeySpend.multiply(BigInt(hashedSharedSecret));
+    const stealthPublicKey = spendingPublicKeyPoint.multiply(BigInt(hashedSharedSecret));
 
-    // Hash the stealth public key and take the last 40 characters to get the stealth address
+    // Get the stealth address from the stealth public key
     const stealthAddress =
       '0x' + keccak256(Buffer.from(stealthPublicKey.toHex(), 'hex').subarray(1)).slice(-40);
 

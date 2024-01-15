@@ -8,7 +8,8 @@ import { privateKeyToAccount } from 'viem/accounts';
 import * as chains from 'viem/chains';
 
 /**
- * Using Viem transaction simulation, predict a new Safe address using the parameters passed in input
+ * Using Viem transaction simulation, predict a new Safe address using the parameters passed in input.
+ *
  * @param chainId
  * @param threshold
  * @param stealthAddresses
@@ -38,13 +39,13 @@ export async function predictStealthSafeAddress({
     released: true,
   };
 
-  // Get the ProxyFactory on current chain
+  // Get the Safe proxy factory
   const proxyFactory = getProxyFactoryDeployment(configuration);
 
-  // Get the safe singleton on current chain
+  // Get the Safe singleton
   const safeSingleton = getSafeSingletonDeployment(configuration);
 
-  // Get the fallback handler
+  // Get the Safe fallback
   const fallbackHandler = getFallbackHandlerDeployment(configuration);
 
   // Ensure the contracts are available on the current chain
@@ -52,7 +53,7 @@ export async function predictStealthSafeAddress({
     throw new Error('No safe contracts found for this configuration.');
   }
 
-  // Encode data for the initializer of the safeSingleton call
+  // Encode data for the initializer of the Safe singleton call
   const initializer = encodeFunctionData({
     abi: safeSingleton.abi,
     functionName: 'setup',

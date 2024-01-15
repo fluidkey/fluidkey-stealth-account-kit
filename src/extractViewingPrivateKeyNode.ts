@@ -2,7 +2,7 @@ import { isHex, toBytes } from 'viem';
 import { HDKey } from 'viem/accounts';
 
 /**
- * Extract the node required to generate the pseudo-random input for stealth address generation.
+ * Extract the node required to generate ephemeral private key input for stealth address generation.
  *
  * It must always be implemented client side and only the resulting node should be shared with the server.
  * @param privateViewingKey

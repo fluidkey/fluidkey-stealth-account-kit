@@ -2,7 +2,7 @@ import { toHex } from 'viem';
 import { type HDKey } from 'viem/accounts';
 
 /**
- * Generate an ephemeral private key based on a private viewing key node, a nonce, and a chainId or coinType.
+ * Generate an ephemeral private key based on a private viewing key node, a nonce, and a chainId or coinType using the BIP-32 derivation path.
  *
  * @param viewingPrivateKeyNode
  * @param nonce
