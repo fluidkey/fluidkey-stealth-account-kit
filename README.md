@@ -7,7 +7,9 @@ It is composed of the following functions:
 - `generateStealthAddresses`: generates stealth addresses based on an ephemeral secret and a list of public spending keys
 - `predictStealthSafeAddress`: predicts the address of a stealth safe based on a list of stealth address owners
 
-An example of how to use these functions to recover stealth addresses based on a user's privateKey can be found in the `example` folder.
+An example of how to use these functions to recover stealth addresses based on a user's privateKey can be found in the `example` folder. 
+
+A written companion explaining the usage of these functions inside of Fluidkey's processes can be found in the [technical walkthrough](technical-walkthrough.md).
 
 Dependencies
 ------------
