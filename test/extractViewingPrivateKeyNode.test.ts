@@ -1,3 +1,4 @@
+import * as fc from 'fast-check';
 import { HDKey } from 'viem/accounts';
 import { extractViewingPrivateKeyNode } from '../src/extractViewingPrivateKeyNode';
 
@@ -55,6 +56,24 @@ describe('extractPrivateViewingKeyNode', () => {
   it('should throw an error if the private viewing key is not a valid hex string', () => {
     expect(() => extractViewingPrivateKeyNode('0xinvalid')).toThrow(
       'Hex private viewing key is not valid.',
+    );
+  });
+
+  it('should handle a variety of valid private viewing keys without crashing', () => {
+    fc.assert(
+      fc.property(fc.hexaString({ minLength: 64, maxLength: 64 }).map(s => `0x${s}` as `0x${string}`), (randomPrivateViewingKey) => {
+        const result = extractViewingPrivateKeyNode(randomPrivateViewingKey, 0);
+        expect(result).toBeInstanceOf(HDKey);
+      }),
+    );
+  });
+
+  it('should throw an error for a variety of invalid private viewing keys', () => {
+    fc.assert(
+      fc.property(fc.string({ minLength: 64, maxLength: 64 }).map(s => `0x${s}` as `0x${string}`), (randomPrivateViewingKey) => {
+        fc.pre(!/^0x[0-9a-fA-F]{64}$/.test(randomPrivateViewingKey));
+        expect(() => extractViewingPrivateKeyNode(randomPrivateViewingKey)).toThrow('Hex private viewing key is not valid.');
+      }),
     );
   });
 });

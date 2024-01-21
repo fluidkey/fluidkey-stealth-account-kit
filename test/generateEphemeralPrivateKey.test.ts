@@ -1,3 +1,4 @@
+import * as fc from 'fast-check';
 import { extractViewingPrivateKeyNode } from '../src/extractViewingPrivateKeyNode';
 import { generateEphemeralPrivateKey } from '../src/generateEphemeralPrivateKey';
 
@@ -41,5 +42,19 @@ describe('generateEphemeralPrivateKey', () => {
         nonce: 0,
       }),
     ).toThrow('coinType or chainId must be defined.');
+  });
+
+  it('should handle a variety of valid private viewing keys and nonces without crashing', () => {
+    fc.assert(
+      fc.property(fc.hexaString({ minLength: 64, maxLength: 64 }).map(s => `0x${s}` as `0x${string}`), fc.nat(), (randomPrivateViewingKey, nonce) => {
+        const viewingPrivateKeyNode = extractViewingPrivateKeyNode(randomPrivateViewingKey);
+        const { ephemeralPrivateKey } = generateEphemeralPrivateKey({
+          viewingPrivateKeyNode,
+          nonce,
+          chainId: 10,
+        });
+        expect(ephemeralPrivateKey).toMatch(/^0x[0-9a-fA-F]{64}$/);
+      }),
+    );
   });
 });

@@ -1,3 +1,4 @@
+import * as fc from 'fast-check';
 import { predictStealthSafeAddress } from '../src/predictStealthSafeAddress';
 
 describe('predictStealthSafeAddress', () => {
@@ -39,4 +40,26 @@ describe('predictStealthSafeAddress', () => {
       }),
     ).rejects.toThrow('No safe contracts found for this configuration.');
   });
+
+  it('should handle a variety of valid inputs without crashing', () => {
+    fc.assert(
+      fc.asyncProperty(
+        fc.constantFrom(1, 5, 10, 8453, 42161),
+        fc.array(fc.hexaString({ minLength: 40, maxLength: 40 }).map(s => `0x${s}`), { minLength: 1, maxLength: 10 }),
+        async (chainId, stealthAddresses) => {
+          const threshold = Math.floor(Math.random() * stealthAddresses.length) + 1;
+          const result = await predictStealthSafeAddress({
+            chainId,
+            threshold,
+            stealthAddresses,
+          });
+          expect(result).toHaveProperty('stealthSafeAddress');
+          expect(result.stealthSafeAddress).toMatch(/^0x[a-fA-F0-9]{40}$/);
+        },
+      ),
+    ).catch((error) => {
+      throw error;
+    });
+  });
+
 });

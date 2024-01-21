@@ -1,3 +1,4 @@
+import * as fc from 'fast-check';
 import { privateKeyToAccount } from 'viem/accounts';
 import { generateStealthAddresses } from '../src/generateStealthAddresses';
 
@@ -23,5 +24,25 @@ describe('generateStealthAddresses', () => {
         '0x566953fb7a022f8c7f6421464ab700590f2b3464',
       ],
     });
+  });
+
+  it('should handle a variety of valid private keys without crashing', () => {
+    fc.assert(
+      fc.property(
+        fc.array(fc.hexaString({ minLength: 64, maxLength: 64 }).map(s => `0x${s}` as `0x${string}`), { minLength: 1, maxLength: 10 }),
+        fc.hexaString({ minLength: 64, maxLength: 64 }).map(s => `0x${s}` as `0x${string}`),
+        (privateKeys, ephemeralPrivateKey) => {
+          const spendingPublicKeys = privateKeys.map(privateKey => privateKeyToAccount(privateKey).publicKey);
+          const result = generateStealthAddresses({
+            spendingPublicKeys,
+            ephemeralPrivateKey,
+          });
+          for (const stealthAddress of result.stealthAddresses) {
+            expect(stealthAddress).toMatch(/^0x[0-9a-fA-F]{40}$/);
+            expect(stealthAddress).toHaveLength(42);
+          }
+        },
+      ),
+    );
   });
 });

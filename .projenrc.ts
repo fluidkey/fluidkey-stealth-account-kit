@@ -25,7 +25,8 @@ const project = new typescript.TypeScriptProject({
     'viem@1.21.4',
   ],
   devDeps: [
-    'istanbul-badges-readme',
+    'istanbul-badges-readme@1.8.5',
+    'fast-check@3.15.0',
   ],
   tsconfig: {
     exclude: [

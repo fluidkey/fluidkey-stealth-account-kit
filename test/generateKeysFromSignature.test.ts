@@ -1,3 +1,4 @@
+import * as fc from 'fast-check';
 import { generateKeysFromSignature } from '../src/generateKeysFromSignature';
 
 describe('generateKeysFromSignature', () => {
@@ -22,5 +23,13 @@ describe('generateKeysFromSignature', () => {
   it('should throw an error for a signature missing 0x', () => {
     const signature = 'a'.repeat(132) as `0x${string}`;
     expect(() => generateKeysFromSignature(signature)).toThrow('Signature is not valid.');
+  });
+
+  it('should handle a variety of inputs without crashing or errors', () => {
+    fc.assert(
+      fc.property(fc.hexaString({ minLength: 130, maxLength: 130 }).map(s => `0x${s}` as `0x${string}`), (signature) => {
+        generateKeysFromSignature(signature);
+      }),
+    );
   });
 });
