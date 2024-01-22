@@ -15,7 +15,7 @@ describe('generateEphemeralPrivateKey', () => {
     });
 
     expect(ephemeralPrivateKey).toEqual(
-      '0xef01af02e46bea24d45e909d3c219cbc5122e1cafd13f914deea1237ea0b01a6',
+      '0xe0b00bde074552abedf968bdbfbcaab4d7a2c85a2251ef7cd6c29df9d9cf13b7',
     );
   });
 
@@ -29,7 +29,7 @@ describe('generateEphemeralPrivateKey', () => {
     });
 
     expect(ephemeralPrivateKey).toEqual(
-      '0x4f80725f967e22f2597e363f977bb563de45c5e22e9c3594ebc0de8bdccf8945',
+      '0x51bbb418b9c5743db6ea0419002b7da4bf3e0232adde05fc2d23334b388a726e',
     );
   });
 
