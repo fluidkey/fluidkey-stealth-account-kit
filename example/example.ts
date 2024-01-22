@@ -83,14 +83,14 @@ export async function example({
 
 async function runExample() {
   const results = await example({
-    userPrivateKey: '0xa795a0c0b64ccd65c1ca2890f8a592a9cad9f11e4a63a34acd628d8e308d39a4',
+    userPrivateKey: '0x8575420a19052cf9bbe9ef4ac755a9abaaefa3f1f2e35d14c04f38829182e9ba',
     keyGenerationMessage: `Sign this message to generate your Fluidkey private payment keys.
 
 WARNING: Only sign this message within a trusted website or platform to avoid loss of funds.
 
-Secret: c0bd24706c958efa41b1e470838288dbd617a30930c974e403e386e4434648ac`,
+Secret: deccc7b0ba824d3b6f73c50c41935eabf5e7e10f5b0177732344899c60be0f16`,
     chainId: 5,
-    startNonce: 10,
+    startNonce: 0,
     endNonce: 30,
   });
 

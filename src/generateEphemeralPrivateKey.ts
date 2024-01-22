@@ -47,7 +47,7 @@ export function generateEphemeralPrivateKey({
   }
 
   // Create the derivation path
-  const index = `m/${coinTypePart1}'/${coinTypePart2}'/0'/${parentNonce}/${nonce}`;
+  const index = `m/${coinTypePart1}'/${coinTypePart2}'/0'/${parentNonce}'/${nonce}'`;
 
   // Derive the child private key based on the index
   const childPrivateKey = viewingPrivateKeyNode.derive(index);
