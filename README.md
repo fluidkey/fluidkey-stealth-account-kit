@@ -1,13 +1,13 @@
 The Fluidkey Trust Kit is an open source repository of the core cryptographic functions used by Fluidkey’s interface and SDK. It enables anyone to independently generate and recover Fluidkey stealth smart accounts and related funds. 
 
 It is composed of the following functions:
-- `generateKeysFromSignature`: generates a user's private keypair from a signature
-- `extractViewingPrivateKeyNode`: extracts a [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) node from a private viewing key
-- `generateEphemeralPrivateKey`: generates an ephemeral private key based on the private viewing key node
-- `generateStealthAddresses`: generates stealth addresses based on an ephemeral secret and a list of public spending keys
-- `predictStealthSafeAddress`: predicts the address of a stealth safe based on a list of stealth address owners
+- [`generateKeysFromSignature`](/src/generateKeysFromSignature.ts): generates a user's private keypair from a signature
+- [`extractViewingPrivateKeyNode`](/src/extractViewingPrivateKeyNode.ts): extracts a [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) node from a private viewing key
+- [`generateEphemeralPrivateKey`](/src/generateEphemeralPrivateKey.ts): generates an ephemeral private key based on the private viewing key node
+- [`generateStealthAddresses`](/src/generateStealthAddresses.ts): generates stealth addresses based on an ephemeral secret and a list of public spending keys
+- [`predictStealthSafeAddress`](/src/predictStealthSafeAddress.ts): predicts the address of a stealth safe based on a list of stealth address owners
 
-An example of how to use these functions to recover stealth addresses based on a user's privateKey can be found in the `example` folder. 
+An example of how to use these functions to recover stealth addresses based on a user's privateKey can be found in the [`example`](/example/example.ts) folder. 
 
 A written companion explaining the usage of these functions inside of Fluidkey's processes can be found in the [technical walkthrough](technical-walkthrough.md).
 

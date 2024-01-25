@@ -46,7 +46,7 @@ Each stealth account is controlled by a stealth EOA that acts as the sole signer
 
 The stealth EOA is derived pseudo-randomly using the viewing key node shared by the user (see section 2.). Every time a new stealth account is required, the ephemeral private key used to derive the stealth EOA is a new leaf of the shared viewing key node. 
 
-Specifically, each new stealth address request increments the viewing key node `p/n` by one and derives the secret from the obtained leaf `m/5564'/N'/c0'/c1'/0'/p/n`, where `c0` and `c1` represent the coinType of the chain used following [ENSIP-11](https://docs.ens.domains/ens-improvement-proposals/ensip-11-evmchain-address-resolution ).
+Specifically, each new stealth address request increments the viewing key node `p/n` by one and derives the secret from the obtained leaf `m/5564'/N'/c0'/c1'/0'/p'/n'`, where `c0` and `c1` represent the coinType of the chain used following [ENSIP-11](https://docs.ens.domains/ens-improvement-proposals/ensip-11-evmchain-address-resolution ).
 
 See [`generateEphemeralPrivateKey`](/src/generateEphemeralPrivateKey.ts) and [`generateStealthAddresses`](/src/generateStealthAddresses.ts) in the trust kit.
 
