@@ -30,7 +30,7 @@ See [`extractViewingPrivateKeyNode`](/src/extractViewingPrivateKeyNode.ts) in th
 
 ## 3. Stealth Accounts
 
-Fluidkey uses [Safe smart accounts](https://github.com/safe-global/safe-contracts) as stealth accounts. They act as stealth addresses with the added UX benefits of smart accounts, such as:
+Fluidkey currently uses 1/1 [Safe smart accounts](https://github.com/safe-global/safe-contracts) as stealth accounts. They act as stealth addresses with the added UX benefits of smart accounts, such as:
 - Gas sponsorship
 - Multisig compatibility
 - Key rotation
@@ -38,7 +38,7 @@ Fluidkey uses [Safe smart accounts](https://github.com/safe-global/safe-contract
 
 A drawback to be aware of, is that like regular Safes, stealth smart account addresses are not usable across multiple chains. Users therefore need to ensure they use an address generated for the chain they are receiving funds on. 
 
-For every available chain, Fluidkey provides users with a static ENS of the form `username.chain_shortname.fkey.id/eth`, such as `user.gor.fkey.id` on Goerli. This identifier resolves a new stealth address specific to the chain on every query. This allows users to send funds to a single human-readable identifier while protecting recipient privacy.
+For every available chain, Fluidkey provides users with a static ENS of the form `username.chain_shortname.fkey.id/eth`, such as `user.op.fkey.id` on Optimism. This identifier resolves a new stealth address specific to the chain on every query. This allows users to send funds to a single human-readable identifier while protecting recipient privacy.
 
 ### 3.a. Stealth Signer Derivation
 
