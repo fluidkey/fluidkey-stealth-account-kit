@@ -1,3 +1,4 @@
+import assert from 'node:assert';
 import {
   getFallbackHandlerDeployment,
   getProxyFactoryDeployment,
@@ -14,7 +15,6 @@ import {
   toBytes,
 } from 'viem';
 import * as chains from 'viem/chains';
-import assert from 'node:assert';
 
 /**
  * Using Viem transaction simulation, predict a new Safe address using the parameters passed in input.
@@ -26,7 +26,7 @@ import assert from 'node:assert';
  * @param transport (optional) a custom viem transport to use for the simulation
  * @return Promise<{ stealthSafeAddress }> the predicted Safe address (not deployed)
  */
-export async function predictStealthSafeAddress({
+export async function predictStealthSafeAddressWithClient({
   chainId,
   threshold,
   stealthAddresses,
@@ -89,7 +89,6 @@ export async function predictStealthSafeAddress({
 
   // Return the predicted Safe address
   const stealthSafeAddress = ('0x' + (result.data as string).slice(-40)) as `0x${string}`;
-  process.exit(0);
   return { stealthSafeAddress };
 }
 
@@ -155,7 +154,7 @@ export async function predictStealthSafeAddressWithBytecode({
   });
 
   // Return the predicted Safe address
-  return { stealthSafeAddress };
+  return { stealthSafeAddress: stealthSafeAddress.toLowerCase() as `0x${string}` };
 }
 
 /**

@@ -1,5 +1,5 @@
 import * as fc from 'fast-check';
-import { generateKeysFromSignature } from '../src/generateKeysFromSignature';
+import { generateKeysFromSignature } from '../src';
 
 describe('generateKeysFromSignature', () => {
   it('should generate a private key pair from a valid signature', () => {
