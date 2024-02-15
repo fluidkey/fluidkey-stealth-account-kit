@@ -5,7 +5,8 @@ It is composed of the following functions:
 - [`extractViewingPrivateKeyNode`](/src/extractViewingPrivateKeyNode.ts): extracts a [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) node from a private viewing key
 - [`generateEphemeralPrivateKey`](/src/generateEphemeralPrivateKey.ts): generates an ephemeral private key based on the private viewing key node
 - [`generateStealthAddresses`](/src/generateStealthAddresses.ts): generates stealth addresses based on an ephemeral secret and a list of public spending keys
-- [`predictStealthSafeAddressWithClient`](/src/predictStealthSafeAddress.ts): predicts the address of a stealth safe based on a list of stealth address owners
+- [`predictStealthSafeAddressWithClient`](/src/predictStealthSafeAddress.ts): predicts the address of a stealth safe based on a list of stealth address owners calling the Safe Proxy Factory Deployment contract
+- [`predictStealthSafeAddressWithBytecode`](/src/predictStealthSafeAddress.ts): predicts the address of a stealth safe based on a list of stealth address owners simulating the CREATE2 call using the bytecode of the to-be deployed Safe Proxy
 
 An example of how to use these functions to recover stealth addresses based on a user's privateKey can be found in the [`example`](/example/example.ts) folder. 
 
