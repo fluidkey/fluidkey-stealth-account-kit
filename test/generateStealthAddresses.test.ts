@@ -1,6 +1,6 @@
 import * as fc from 'fast-check';
 import { privateKeyToAccount } from 'viem/accounts';
-import { generateStealthAddresses } from '../src/generateStealthAddresses';
+import { generateStealthAddresses } from '../src';
 
 describe('generateStealthAddresses', () => {
   it('should generate the correct stealth addresses', () => {

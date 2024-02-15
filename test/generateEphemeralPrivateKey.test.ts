@@ -1,6 +1,5 @@
 import * as fc from 'fast-check';
-import { extractViewingPrivateKeyNode } from '../src/extractViewingPrivateKeyNode';
-import { generateEphemeralPrivateKey } from '../src/generateEphemeralPrivateKey';
+import { extractViewingPrivateKeyNode, generateEphemeralPrivateKey } from '../src';
 
 describe('generateEphemeralPrivateKey', () => {
   const privateViewingKey = '0xe377059c0f7d594f953672d99706109ef69b9044a6d009daf6e3066e179dd42d';

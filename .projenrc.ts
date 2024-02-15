@@ -22,7 +22,7 @@ const project = new typescript.TypeScriptProject({
   deps: [
     '@noble/secp256k1@1.7.1',
     '@safe-global/safe-deployments@1.29.0',
-    'viem@1.21.4',
+    'viem@2.7.6',
   ],
   devDeps: [
     'istanbul-badges-readme@1.8.5',

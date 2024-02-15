@@ -56,4 +56,4 @@ The pseudo-random derivation of the stealth EOA ensures that the user can indepe
 
 Sending assets to a user's stealth account does not require the deployment of the underlying smart contract. Instead, the stealth account's address is counterfactually predicted and is only deployed at the moment of withdrawal. 
 
-See [`predictStealthSafeAddress`](/src/predictStealthSafeAddress.ts) in the trust kit.
+See [`predictStealthSafeAddressWithClient`](/src/predictStealthSafeAddress.ts) in the trust kit.
