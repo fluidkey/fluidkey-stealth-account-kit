@@ -8,7 +8,6 @@ import { keccak256, toHex } from 'viem';
  * @param ephemeralPrivateKey
  * @returns stealthAddresses
  */
-
 export function generateStealthAddresses({
   spendingPublicKeys,
   ephemeralPrivateKey,

@@ -67,6 +67,7 @@ export async function example({
     });
 
     // Predict the corresponding stealth Safe address
+    console.log(`predicting ${stealthAddresses}`);
     const { stealthSafeAddress } = await predictStealthSafeAddress({
       chainId,
       threshold: 1,
@@ -89,7 +90,7 @@ async function runExample() {
 WARNING: Only sign this message within a trusted website or platform to avoid loss of funds.
 
 Secret: deccc7b0ba824d3b6f73c50c41935eabf5e7e10f5b0177732344899c60be0f16`,
-    chainId: 5,
+    chainId: 11155111,
     startNonce: 0,
     endNonce: 30,
   });
