@@ -103,7 +103,7 @@ export async function predictStealthSafeAddressWithClient({
  * @param useDefaultAddress {boolean} (optional) if true, the Safe default address will be used - see DefaultAddress inside https://github.com/safe-global/safe-deployments
  * @return Promise<{ stealthSafeAddress }> the predicted Safe address (not deployed)
  */
-export async function predictStealthSafeAddressWithBytecode({
+export function predictStealthSafeAddressWithBytecode({
   chainId,
   safeProxyBytecode,
   threshold,
@@ -115,7 +115,7 @@ export async function predictStealthSafeAddressWithBytecode({
   stealthAddresses: string[];
   chainId?: number;
   useDefaultAddress?: boolean;
-}): Promise<{ stealthSafeAddress: `0x${string}` }> {
+}): { stealthSafeAddress: `0x${string}` } {
   // if useDefaultAddress is false, chainId is required
   if (!useDefaultAddress) {
     assert(!!chainId, 'chainId is required when useDefaultAddress is false');

@@ -102,7 +102,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
     ];
     const expectedStealthSafeAddress = '0x695fd4ce104c325611ac1696fd4ba3568464810f';
 
-    const result = await predictStealthSafeAddressWithBytecode({
+    const result = predictStealthSafeAddressWithBytecode({
       useDefaultAddress: true,
       threshold,
       stealthAddresses,
@@ -121,14 +121,14 @@ describe('predictStealthSafeAddressWithBytecode', () => {
       '0xfe972d3976f7cc5ba1c9b471d48362b82c6c5fdd',
     ];
 
-    const resultWithUseDefaultAddress = await predictStealthSafeAddressWithBytecode({
+    const resultWithUseDefaultAddress = predictStealthSafeAddressWithBytecode({
       useDefaultAddress: true,
       threshold,
       stealthAddresses,
       safeProxyBytecode,
     });
 
-    const resultWithChainMainnet = await predictStealthSafeAddressWithBytecode({
+    const resultWithChainMainnet = predictStealthSafeAddressWithBytecode({
       chainId: 1,
       threshold,
       stealthAddresses,
@@ -183,7 +183,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
         fc.array(fc.hexaString({ minLength: 40, maxLength: 40 }).map(s => `0x${s}`), { minLength: 1, maxLength: 10 }),
         async (chainId, stealthAddresses) => {
           const threshold = Math.floor(Math.random() * stealthAddresses.length) + 1;
-          const result = await predictStealthSafeAddressWithBytecode({
+          const result = predictStealthSafeAddressWithBytecode({
             chainId,
             threshold,
             stealthAddresses,
