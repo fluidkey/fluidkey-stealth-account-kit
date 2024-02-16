@@ -1,8 +1,8 @@
-import assert from 'assert';
 import {
   getFallbackHandlerDeployment,
   getProxyFactoryDeployment,
-  getSafeSingletonDeployment, SingletonDeployment,
+  getSafeSingletonDeployment,
+  SingletonDeployment,
 } from '@safe-global/safe-deployments';
 import {
   createPublicClient,
@@ -45,7 +45,9 @@ export async function predictStealthSafeAddressWithClient({
 
   // if useDefaultAddress is false, chainId is required
   if (!useDefaultAddress) {
-    assert(!!chainId, 'chainId is required when useDefaultAddress is false');
+    if (!chainId) {
+      throw new Error('chainId is required when useDefaultAddress is false');
+    }
   } else {
     // if useDefaultAddress is true, use mainnet chainId - all the chains will have the same code deployed at the same address
     chainId = 1;
@@ -124,7 +126,9 @@ export function predictStealthSafeAddressWithBytecode({
 }): { stealthSafeAddress: `0x${string}` } {
   // if useDefaultAddress is false, chainId is required
   if (!useDefaultAddress) {
-    assert(!!chainId, 'chainId is required when useDefaultAddress is false');
+    if (!chainId) {
+      throw new Error('chainId is required when useDefaultAddress is false');
+    }
   } else {
     // if useDefaultAddress is true, use mainnet chainId - all the chains will have the same code deployed at the same address
     chainId = 1;
@@ -194,7 +198,9 @@ function getSafeInitializerData ({
 
   // if useDefaultAddress is false, chainId is required
   if (!useDefaultAddress) {
-    assert(!!chainId, 'chainId is required when useDefaultAddress is false');
+    if (!chainId) {
+      throw new Error('chainId is required when useDefaultAddress is false');
+    }
   } else {
     // if useDefaultAddress is true, use mainnet chainId - all the chains will have the same code deployed at the same address
     chainId = 1;
