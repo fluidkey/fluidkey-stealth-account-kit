@@ -16,7 +16,7 @@ const project = new typescript.TypeScriptProject({
   authorOrganization: true,
   packageName: '@fluidkey/trust-kit',
   releaseToNpm: true,
-  npmAccess: NpmAccess.RESTRICTED,
+  npmAccess: NpmAccess.PUBLIC,
   defaultReleaseBranch: 'main',
 
   deps: [

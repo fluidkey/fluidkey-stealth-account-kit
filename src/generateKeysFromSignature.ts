@@ -19,8 +19,8 @@ export function generateKeysFromSignature(signature: `0x${string}`): {
   }
 
   // Split hex string signature into two 32 byte chunks, ignore the last byte
-  const startIndex = 2;
-  const length = 64;
+  const startIndex = 2; // first two characters are 0x, so skip these
+  const length = 64; // each 32 byte chunk is in hex, so 64 characters
   const portion1 = signature.slice(startIndex, startIndex + length);
   const portion2 = signature.slice(startIndex + length, startIndex + length + length);
 
