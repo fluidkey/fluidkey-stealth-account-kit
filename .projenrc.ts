@@ -22,7 +22,7 @@ const project = new typescript.TypeScriptProject({
   deps: [
     '@noble/secp256k1@1.7.1',
     '@safe-global/safe-deployments@1.29.0',
-    'viem@2.7.6',
+    'viem@2.7.9',
   ],
   devDeps: [
     'istanbul-badges-readme@1.8.5',
@@ -33,6 +33,8 @@ const project = new typescript.TypeScriptProject({
       'example/**/*',
     ],
     compilerOptions: {
+      // needed due to bug with viem types. In the future, try to remove it and run npx projen build to see if viem types are fixed
+      skipLibCheck: true,
       lib: [
         'es2019', 'dom',
       ],
