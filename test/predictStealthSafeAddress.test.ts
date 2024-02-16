@@ -148,14 +148,14 @@ describe('predictStealthSafeAddressWithBytecode', () => {
       '0xfe972d3976f7cc5ba1c9b471d48362b82c6c5fdd',
     ];
 
-    await expect(
+    expect( () =>
       predictStealthSafeAddressWithBytecode({
         chainId,
         threshold,
         stealthAddresses,
         safeProxyBytecode,
       }),
-    ).rejects.toThrow('No safe contracts found for this configuration.');
+    ).toThrow('No safe contracts found for this configuration.');
   });
 
   it('should fail if not the chainId nor the useDefaultAddress values are there', async () => {
@@ -167,13 +167,13 @@ describe('predictStealthSafeAddressWithBytecode', () => {
       '0xfe972d3976f7cc5ba1c9b471d48362b82c6c5fdd',
     ];
 
-    await expect(
-      predictStealthSafeAddressWithBytecode({
+    expect(
+      () => predictStealthSafeAddressWithBytecode({
         threshold,
         stealthAddresses,
         safeProxyBytecode,
       }),
-    ).rejects.toThrow('chainId is required when useDefaultAddress is false');
+    ).toThrow('chainId is required when useDefaultAddress is false');
   });
 
   it('should handle a variety of valid inputs without crashing', () => {
