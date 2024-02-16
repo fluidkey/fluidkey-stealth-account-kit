@@ -46,7 +46,7 @@
   "dependencies": {
     "@noble/secp256k1": "1.7.1",
     "@safe-global/safe-deployments": "1.29.0",
-    "viem": "2.7.6"
+    "viem": "2.7.9"
   },
   "main": "lib/index.js",
   "license": "MIT",
