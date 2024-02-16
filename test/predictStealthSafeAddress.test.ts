@@ -17,6 +17,7 @@ describe('predictStealthSafeAddressWithClient', () => {
       chainId,
       threshold,
       stealthAddresses,
+      safeVersion: '1.3.0',
     });
 
     expect(result).toEqual({ stealthSafeAddress: expectedStealthSafeAddress });
@@ -35,12 +36,14 @@ describe('predictStealthSafeAddressWithClient', () => {
       useDefaultAddress: true,
       threshold,
       stealthAddresses,
+      safeVersion: '1.3.0',
     });
 
     const resultWithChainMainnet = await predictStealthSafeAddressWithClient({
       chainId: 1,
       threshold,
       stealthAddresses,
+      safeVersion: '1.3.0',
     });
 
     expect(resultWithUseDefaultAddress).toEqual(resultWithChainMainnet);
@@ -61,6 +64,7 @@ describe('predictStealthSafeAddressWithClient', () => {
         chainId,
         threshold,
         stealthAddresses,
+        safeVersion: '1.3.0',
       }),
     ).rejects.toThrow('No safe contracts found for this configuration.');
   });
@@ -76,6 +80,7 @@ describe('predictStealthSafeAddressWithClient', () => {
             chainId,
             threshold,
             stealthAddresses,
+            safeVersion: '1.3.0',
           });
           expect(result).toHaveProperty('stealthSafeAddress');
           expect(result.stealthSafeAddress).toMatch(/^0x[a-fA-F0-9]{40}$/);
@@ -107,6 +112,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
       threshold,
       stealthAddresses,
       safeProxyBytecode,
+      safeVersion: '1.3.0',
     });
 
     expect(result).toEqual({ stealthSafeAddress: expectedStealthSafeAddress });
@@ -126,6 +132,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
       threshold,
       stealthAddresses,
       safeProxyBytecode,
+      safeVersion: '1.3.0',
     });
 
     const resultWithChainMainnet = predictStealthSafeAddressWithBytecode({
@@ -133,6 +140,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
       threshold,
       stealthAddresses,
       safeProxyBytecode,
+      safeVersion: '1.3.0',
     });
 
     expect(resultWithUseDefaultAddress).toEqual(resultWithChainMainnet);
@@ -154,6 +162,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
         threshold,
         stealthAddresses,
         safeProxyBytecode,
+        safeVersion: '1.3.0',
       }),
     ).toThrow('No safe contracts found for this configuration.');
   });
@@ -172,6 +181,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
         threshold,
         stealthAddresses,
         safeProxyBytecode,
+        safeVersion: '1.3.0',
       }),
     ).toThrow('chainId is required when useDefaultAddress is false');
   });
@@ -188,6 +198,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
             threshold,
             stealthAddresses,
             safeProxyBytecode,
+            safeVersion: '1.3.0',
           });
           expect(result).toHaveProperty('stealthSafeAddress');
           expect(result.stealthSafeAddress).toMatch(/^0x[a-fA-F0-9]{40}$/);

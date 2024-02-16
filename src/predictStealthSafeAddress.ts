@@ -15,6 +15,7 @@ import {
   toBytes,
 } from 'viem';
 import * as chains from 'viem/chains';
+import { SafeVersion } from './predictStealthSafeAddressTypes';
 
 /**
  * Using Viem transaction simulation, predict a new Safe address using the parameters passed in input.
@@ -32,12 +33,14 @@ export async function predictStealthSafeAddressWithClient({
   stealthAddresses,
   transport,
   useDefaultAddress,
+  safeVersion,
 }: {
   threshold: number;
   stealthAddresses: string[];
   chainId?: number;
   transport?: any;
   useDefaultAddress?: boolean;
+  safeVersion: SafeVersion;
 }): Promise<{ stealthSafeAddress: `0x${string}` }> {
 
   // if useDefaultAddress is false, chainId is required
@@ -53,6 +56,7 @@ export async function predictStealthSafeAddressWithClient({
     threshold,
     stealthAddresses,
     useDefaultAddress,
+    safeVersion,
   });
 
   const safeSingletonAddress = useDefaultAddress ? safeSingleton.defaultAddress : safeSingleton.networkAddresses[chainId.toString()];
@@ -109,12 +113,14 @@ export function predictStealthSafeAddressWithBytecode({
   threshold,
   stealthAddresses,
   useDefaultAddress,
+  safeVersion,
 }: {
   safeProxyBytecode: `0x${string}`;
   threshold: number;
   stealthAddresses: string[];
   chainId?: number;
   useDefaultAddress?: boolean;
+  safeVersion: SafeVersion;
 }): { stealthSafeAddress: `0x${string}` } {
   // if useDefaultAddress is false, chainId is required
   if (!useDefaultAddress) {
@@ -129,6 +135,7 @@ export function predictStealthSafeAddressWithBytecode({
     threshold,
     stealthAddresses,
     useDefaultAddress,
+    safeVersion,
   });
 
   const safeSingletonAddress = useDefaultAddress ? safeSingleton.defaultAddress : safeSingleton.networkAddresses[chainId.toString()];
@@ -170,11 +177,13 @@ function getSafeInitializerData ({
   threshold,
   stealthAddresses,
   useDefaultAddress,
+  safeVersion,
 }: {
   threshold: number;
   stealthAddresses: string[];
   chainId?: number;
   useDefaultAddress?: boolean;
+  safeVersion: SafeVersion;
 }): {
     initializer: `0x${string}`;
     proxyFactory: SingletonDeployment;
@@ -182,7 +191,6 @@ function getSafeInitializerData ({
   } {
   // Constants
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
-  const SAFE_VERSION = '1.3.0';
 
   // if useDefaultAddress is false, chainId is required
   if (!useDefaultAddress) {
@@ -195,7 +203,7 @@ function getSafeInitializerData ({
   // Configuration to fetch the Safe contracts
   const configuration = {
     network: chainId.toString(),
-    version: SAFE_VERSION,
+    version: safeVersion,
     released: true,
   };
 
