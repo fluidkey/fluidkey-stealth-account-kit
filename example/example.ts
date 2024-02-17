@@ -1,11 +1,11 @@
 import { privateKeyToAccount } from 'viem/accounts';
 import {
-  predictStealthSafeAddressWithBytecode,
-  predictStealthSafeAddressWithClient,
   extractViewingPrivateKeyNode,
   generateEphemeralPrivateKey,
   generateKeysFromSignature,
   generateStealthAddresses,
+  predictStealthSafeAddressWithBytecode,
+  predictStealthSafeAddressWithClient,
 } from '../src';
 
 /**
@@ -70,8 +70,8 @@ export async function example({
     });
 
     // Predict the corresponding stealth Safe address, both passing the client and using the CREATE2 option with
-    // bytecode, making sure the address generated are the same
-    console.log(`predicting ${stealthAddresses}`);
+    // bytecode, making sure the addresses generated are the same
+    console.log(`predicting Safe for signer ${stealthAddresses}`);
     const { stealthSafeAddress: stealthSafeAddressWithClient } = await predictStealthSafeAddressWithClient({
       chainId,
       threshold: 1,

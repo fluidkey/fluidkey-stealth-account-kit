@@ -185,7 +185,7 @@ function getSafeInitializerData ({
 }: {
   threshold: number;
   stealthAddresses: string[];
-  chainId?: number;
+  chainId: number;
   useDefaultAddress?: boolean;
   safeVersion: SafeVersion;
 }): {
@@ -195,16 +195,6 @@ function getSafeInitializerData ({
   } {
   // Constants
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
-
-  // if useDefaultAddress is false, chainId is required
-  if (!useDefaultAddress) {
-    if (!chainId) {
-      throw new Error('chainId is required when useDefaultAddress is false');
-    }
-  } else {
-    // if useDefaultAddress is true, use mainnet chainId - all the chains will have the same code deployed at the same address
-    chainId = 1;
-  }
 
   // Configuration to fetch the Safe contracts
   const configuration = {
