@@ -24,7 +24,7 @@ The private key pair is composed of two keys:
 
 To allow Fluidkey to generate addresses on behalf of the user and retrieve their funds, the user shares a [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) derived node of their private viewing key with Fluidkey. 
 
-The shared node is of the form `m/5564'/N'` where `N` is the number identifying the specific node shared. 5564 refers to [ERC-5564](https://eips.ethereum.org/EIPS/eip-5564), focused on standardizing the use of stealth addresses. 
+The shared node is of the form `m/5564'/N'` where `N` is the number identifying the specific node shared. 5564 refers to [ERC-5564](https://eips.ethereum.org/EIPS/eip-5564), focused on standardizing the use of stealth addresses. Fluidkey currently uses `0` as the `N` value for all users. In the future, `N` may also be used to reference a specific time period (e.g. year, Unix timestamp) or other dimension to be able to give third parties view access to this specific dimension only.
 
 See [`extractViewingPrivateKeyNode`](/src/extractViewingPrivateKeyNode.ts) in the trust kit.
 
@@ -47,6 +47,8 @@ Each stealth account is controlled by a stealth EOA that acts as the sole signer
 The stealth EOA is derived pseudo-randomly using the viewing key node shared by the user (see section 2.). Every time a new stealth account is required, the ephemeral private key used to derive the stealth EOA is a new leaf of the shared viewing key node. 
 
 Specifically, each new stealth address request increments the viewing key node `p/n` by one and derives the secret from the obtained leaf `m/5564'/N'/c0'/c1'/0'/p'/n'`, where `c0` and `c1` represent the coinType of the chain used following [ENSIP-11](https://docs.ens.domains/ens-improvement-proposals/ensip-11-evmchain-address-resolution ).
+
+We use `c0'/c1'` and `p'/n'` to ensure no single number in the derivation path exceeds or equals `0x80000000` (`2^31`) to comply with BIP-32 requirements, even when the full coinType or node is larger than this threshold. The max value of a nonce with this derivation code is `0x7FFFFFFFFFFFFFF` (`576,460,752,303,423,487`).
 
 See [`generateEphemeralPrivateKey`](/src/generateEphemeralPrivateKey.ts) and [`generateStealthAddresses`](/src/generateStealthAddresses.ts) in the trust kit.
 
