@@ -9,7 +9,7 @@ describe('generateEphemeralPrivateKey', () => {
 
     const { ephemeralPrivateKey } = generateEphemeralPrivateKey({
       viewingPrivateKeyNode,
-      nonce: 0,
+      nonce: BigInt(0),
       chainId: 10,
     });
 
@@ -23,7 +23,7 @@ describe('generateEphemeralPrivateKey', () => {
 
     const { ephemeralPrivateKey } = generateEphemeralPrivateKey({
       viewingPrivateKeyNode,
-      nonce: 2147483649,
+      nonce: BigInt(2147483649),
       chainId: 10,
     });
 
@@ -37,7 +37,7 @@ describe('generateEphemeralPrivateKey', () => {
 
     const { ephemeralPrivateKey } = generateEphemeralPrivateKey({
       viewingPrivateKeyNode,
-      nonce: 0,
+      nonce: BigInt(0),
       coinType: 2147483658,
     });
 
@@ -46,7 +46,17 @@ describe('generateEphemeralPrivateKey', () => {
     );
   });
 
-  // TO-DO throw an error if the nonce is too high
+  it('should throw an error if the nonce is too high', () => {
+    const viewingPrivateKeyNode = extractViewingPrivateKeyNode(privateViewingKey);
+
+    expect(() =>
+      generateEphemeralPrivateKey({
+        viewingPrivateKeyNode,
+        nonce: BigInt('576460752303423488'),
+        chainId: 10,
+      }),
+    ).toThrow('Nonce is too large. Max value is 0x7FFFFFFFFFFFFFF.');
+  });
 
   it('should throw an error if no coinType or chainId is provided', () => {
     const viewingPrivateKeyNode = extractViewingPrivateKeyNode(privateViewingKey);
@@ -54,7 +64,7 @@ describe('generateEphemeralPrivateKey', () => {
     expect(() =>
       generateEphemeralPrivateKey({
         viewingPrivateKeyNode,
-        nonce: 0,
+        nonce: BigInt(0),
       }),
     ).toThrow('coinType or chainId must be defined.');
   });
@@ -65,7 +75,7 @@ describe('generateEphemeralPrivateKey', () => {
         const viewingPrivateKeyNode = extractViewingPrivateKeyNode(randomPrivateViewingKey);
         const { ephemeralPrivateKey } = generateEphemeralPrivateKey({
           viewingPrivateKeyNode,
-          nonce,
+          nonce: BigInt(nonce),
           chainId: 10,
         });
         expect(ephemeralPrivateKey).toMatch(/^0x[0-9a-fA-F]{64}$/);

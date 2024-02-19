@@ -18,7 +18,7 @@ export function generateEphemeralPrivateKey({
   coinType,
 }: {
   viewingPrivateKeyNode: HDKey;
-  nonce: number;
+  nonce: bigint;
   chainId?: number;
   coinType?: number;
 }): { ephemeralPrivateKey: `0x${string}` } {
@@ -55,16 +55,19 @@ export function generateEphemeralPrivateKey({
   // the server then generates pseudo-random addresses by incrementing n
   // since each value cannot be larger than 2^31 - 1 (see HARDENED_OFFSET - 0x7FFFFFF)
   // we therefore introduce a parent nonce p to allow for more addresses to be generated.
-  // If the nonce is bigger than n, we put the overflow part into a parentNonce. To simplify
-  // the creation of parentNonce, we set MAX_N to be 0xFFFFFFF. With this schema the combination of nonce
-  // and parent nonce has a max value of 0x7FFFFFFFFFFFFFF = 576460752303423487₁₀
+  // If the nonce is bigger than MAX_NONCE, we put the overflow part into a parentNonce. To simplify
+  // the creation of parentNonce, we set MAX_NONCE to be 0xFFFFFFF. With this schema the combination of nonce
+  // and parent nonce has a max value of 0x7FFFFFFFFFFFFFF-1 = 576460752303423486₁₀
 
   // Split the nonce into two parts to ensure no number above 0x80000000 is used in the derivation path
-  const MAX_NONCE = 0xfffffff;
-  let parentNonce = 0;
+  if (nonce >= BigInt(0x7FFFFFFFFFFFFFF)) {
+    throw new Error('Nonce is too large. Max value is 0x7FFFFFFFFFFFFFF.');
+  }
+  const MAX_NONCE = BigInt(0xfffffff);
+  let parentNonce = BigInt(0);
   if (nonce > MAX_NONCE) {
-    parentNonce = Math.floor(nonce / (MAX_NONCE + 1));
-    nonce = nonce % (MAX_NONCE + 1);
+    parentNonce = nonce / (MAX_NONCE + BigInt(1));
+    nonce = nonce % (MAX_NONCE + BigInt(1));
   }
 
   // Create the derivation path

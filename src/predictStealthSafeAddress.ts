@@ -25,6 +25,7 @@ import { SafeVersion } from './predictStealthSafeAddressTypes';
  * @param useDefaultAddress {boolean} (optional) if true, the Safe default address will be used - see DefaultAddress inside https://github.com/safe-global/safe-deployments
  * @param chainId {number} (optional) the chainId of the network where the Safe will be deployed
  * @param transport (optional) a custom viem transport to use for the simulation
+ * @param safeVersion {SafeVersion} the Safe version to use
  * @return Promise<{ stealthSafeAddress }> the predicted Safe address (not deployed)
  */
 export async function predictStealthSafeAddressWithClient({
@@ -175,6 +176,7 @@ export function predictStealthSafeAddressWithBytecode({
  * @param stealthAddresses {string[]} the stealth addresses controlling the Safe
  * @param chainId {number} (optional) the chainId of the network where the Safe will be deployed
  * @param useDefaultAddress {boolean} (optional) if true, the Safe default address will be used - see DefaultAddress inside https://github.com/safe-global/safe-deployments
+ * @param safeVersion {SafeVersion} the Safe version to use
  */
 function getSafeInitializerData ({
   chainId,
