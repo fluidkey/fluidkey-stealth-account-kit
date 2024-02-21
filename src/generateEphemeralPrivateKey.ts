@@ -38,22 +38,22 @@ export function generateEphemeralPrivateKey({
   const coinTypePart1 = parseInt(coinTypeString.slice(0, 1), 16);
   const coinTypePart2 = parseInt(coinTypeString.slice(1), 16);
 
-  // key derivation structure is m/5564'/N'/c0'/c1'/0'/p/n
+  // key derivation structure is m/5564'/N'/c0'/c1'/0'/p'/n'
 
   // 5564 is the purpose as defined in BIP-43 and aligns with the stealth address EIP number, EIP-5564:
   // https://github.com/bitcoin/bips/blob/master/bip-0043.mediawiki
   // https://eips.ethereum.org/EIPS/eip-5564
 
-  // N is the number of the node shared with the server
+  // N is the number of the node shared with the stealth address generator
 
   // c is the coinType as derived in ENSIP-11 for EVM chains: https://docs.ens.domains/ens-improvement-proposals/ensip-11-evmchain-address-resolution
-  // as it is a number above 0x80000000, which is not allowed in secure-bip32 (see HARDENED_OFFSET), it is split into two parts:
+  // as it is a number above 0x80000000, which is not allowed in scure-bip32 (see HARDENED_OFFSET), it is split into two parts:
   // c0, the first byte of c
   // c1, the remaining bytes of c
 
-  // only the node m/5564'/0' of the private viewing key is shared with the server (see extractPrivateKeyNode)
-  // the server then generates pseudo-random addresses by incrementing n
-  // since each value cannot be larger than 2^31 - 1 (see HARDENED_OFFSET - 0x7FFFFFF)
+  // only the node m/5564'/0' of the private viewing key is shared with the stealth address generator (see extractPrivateKeyNode)
+  // the stealth address generator then generates pseudo-random addresses by incrementing n
+  // since each value cannot be larger than 2^31 - 1 (0x7FFFFFFF)
   // we therefore introduce a parent nonce p to allow for more addresses to be generated.
   // If the nonce is bigger than MAX_NONCE, we put the overflow part into a parentNonce. To simplify
   // the creation of parentNonce, we set MAX_NONCE to be 0xFFFFFFF. With this schema the combination of nonce
