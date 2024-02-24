@@ -48,7 +48,7 @@ The stealth EOA is derived pseudo-randomly using the viewing key node shared by 
 
 Specifically, each new stealth address request increments the viewing key node `p/n` by one and derives the secret from the obtained leaf `m/5564'/N'/c0'/c1'/0'/p'/n'`, where `c0` and `c1` represent the coinType of the chain used following [ENSIP-11](https://docs.ens.domains/ens-improvement-proposals/ensip-11-evmchain-address-resolution ).
 
-We use `c0'/c1'` and `p'/n'` to ensure no single number in the derivation path exceeds or equals `0x80000000` (`2^31`) to comply with BIP-32 requirements, even when the full coinType or node is larger than this threshold. The max value of a nonce with this derivation code is `0x7FFFFFFFFFFFFFF` (`576,460,752,303,423,487`).
+We use `c0'/c1'` and `p'/n'` to ensure no single number in the derivation path exceeds or equals `0x80000000` (`2^31`) to comply with BIP-32 requirements, even when the full coinType or node is larger than this threshold.
 
 See [`generateEphemeralPrivateKey`](/src/generateEphemeralPrivateKey.ts) and [`generateStealthAddresses`](/src/generateStealthAddresses.ts) in the trust kit.
 
