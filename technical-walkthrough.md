@@ -4,7 +4,7 @@ This walkthrough provides background on Fluidkey's core crypto functions, which 
 
 ## 1. Background Reading
 
-To keep the walkthrough concise, we assume the reader has a basic understanding of the following concepts. If you're not familiar with them, we have provided links to resources covering each topic.
+To keep the walkthrough concise, we assume the reader has a basic understanding of the following concepts. If you're not familiar with them, you can start with the linked resources.
 
 - [Elliptic Curve Cryptography](https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/)
 - [Accounts and transactions on public EVM blockchains](https://github.com/ethereumbook/ethereumbook)
@@ -16,7 +16,7 @@ When a user signs into Fluidkey, they are asked to sign a key generation message
 
 See [`generateKeysFromSignature`](/src/generateKeysFromSignature.ts) in the trust kit.
 
-The private key pair never leaves the user's client and is not stored locally. Every time the user re-opens the Fluidkey app, they must sign the key generation message again to derive their private keys.
+The private key pair never leaves the user's client and is not stored locally. Every time the user re-opens the Fluidkey app and wants to send funds out, they must sign the key generation message again to derive their private keys.
 
 The private key pair is composed of two keys:
 - A **private spending key** used to control user funds and sign transactions
@@ -30,15 +30,9 @@ See [`extractViewingPrivateKeyNode`](/src/extractViewingPrivateKeyNode.ts) in th
 
 ## 3. Stealth Accounts
 
-Fluidkey currently uses 1/1 [Safe smart accounts](https://github.com/safe-global/safe-contracts) as stealth accounts. They act as stealth addresses with the added UX benefits of smart accounts, such as:
-- Gas sponsorship
-- Multisig compatibility
-- Key rotation
-- Compatibility with other Safe modules
+Fluidkey currently uses 1/1 [Safe smart accounts](https://github.com/safe-global/safe-contracts) as stealth accounts. They act as stealth addresses with the added UX benefits of smart accounts, such as gas sponsorship.
 
-A drawback to be aware of, is that like regular Safes, stealth smart account addresses are not usable across multiple chains. Users therefore need to ensure they use an address generated for the chain they are receiving funds on. 
-
-For every available chain, Fluidkey provides users with a static ENS of the form `username.chain_shortname.fkey.id/eth`, such as `user.op.fkey.id` on Optimism. This identifier resolves a new stealth address specific to the chain on every query. This allows users to send funds to a single human-readable identifier while protecting recipient privacy.
+By using Safe as the underlying smart account, Fluidkey users also benefit from the security of a battle-tested smart account implementation.
 
 ### 3.a. Stealth Signer Derivation
 
@@ -48,7 +42,7 @@ The stealth EOA is derived pseudo-randomly using the viewing key node shared by 
 
 Specifically, each new stealth address request increments the viewing key node `p/n` by one and derives the secret from the obtained leaf `m/5564'/N'/c0'/c1'/0'/p'/n'`, where `c0` and `c1` represent the coinType of the chain used following [ENSIP-11](https://docs.ens.domains/ens-improvement-proposals/ensip-11-evmchain-address-resolution ).
 
-We use `c0'/c1'` and `p'/n'` to ensure no single number in the derivation path exceeds or equals `0x80000000` (`2^31`) to comply with BIP-32 requirements, even when the full coinType or node is larger than this threshold.
+We use `c0'/c1'` and `p'/n'` to ensure no single number in the derivation path exceeds or equals `0x80000000` (`2^31`) in line with BIP-32 requirements.
 
 See [`generateEphemeralPrivateKey`](/src/generateEphemeralPrivateKey.ts) and [`generateStealthAddresses`](/src/generateStealthAddresses.ts) in the trust kit.
 
@@ -59,3 +53,9 @@ The pseudo-random derivation of the stealth EOA ensures that the user can indepe
 Sending assets to a user's stealth account does not require the deployment of the underlying smart contract. Instead, the stealth account's address is counterfactually predicted and is only deployed at the moment of withdrawal. 
 
 See [`predictStealthSafeAddressWithClient`](/src/predictStealthSafeAddress.ts) in the trust kit.
+
+## 4. ENS Resolution
+
+Fluidkey provides users with a static ENS of the form `username.fkey.id/eth`, such as `you.fkey.eth`. This identifier resolves a new stealth address controlled by the recipient on every query. This allows users to send funds to a single human-readable identifier while protecting recipient privacy.
+
+Fluidkey uses an [ENS offchain resolver](https://github.com/ensdomains/offchain-resolver/) to return stealth addresses.
