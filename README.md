@@ -14,7 +14,7 @@ The library is composed of the following functions:
 - [`predictStealthSafeAddressWithClient`](/src/predictStealthSafeAddress.ts): predicts the address of a stealth [Safe](https://safe.global/) based on a list of stealth address owners (EOAs) calling the Safe Proxy Factory Deployment contract
 - [`predictStealthSafeAddressWithBytecode`](/src/predictStealthSafeAddress.ts): predicts the address of a stealth [Safe](https://safe.global/) based on a list of stealth address owners (EOAs) simulating the CREATE2 call using the bytecode of the to-be deployed Safe Proxy
 
-An example of how to use these functions to recover stealth addresses based on a user's private key can be found in the [`example`](/src/example/example.ts) folder. 
+An example of how to use these functions to recover stealth accounts based on a user's private key can be found in the [`example`](/src/example/example.ts) folder. 
 
 Get Started
 -----------
