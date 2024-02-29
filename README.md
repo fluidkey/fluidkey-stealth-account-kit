@@ -1,8 +1,8 @@
-The Fluidkey Stealth Account Kit is an open source TypeScript library containing the core cryptographic functions used by [Fluidkey](https://fluidkey.com). It enables anyone to independently generate and recover Fluidkey stealth smart accounts and related funds. 
-
-We hope to see more developers build privacy-preserving applications with the kit. If you have questions about the kit or want to contribute, reach out at hey@fluidkey.com. 
+The Fluidkey Stealth Account Kit is an open source TypeScript library containing the core cryptographic functions used by [Fluidkey](https://fluidkey.com). It enables anyone to independently generate and recover stealth smart accounts and related funds.  
 
 A written companion explaining the usage of the kit in Fluidkey's processes can be found in the [technical walkthrough](https://docs.fluidkey.com/technical-walkthrough).
+
+We hope to see more developers build privacy-preserving applications with the kit. If you have questions about the kit or want to contribute, reach out at hey@fluidkey.com.
 
 Contents
 --------
@@ -14,7 +14,7 @@ The library is composed of the following functions:
 - [`predictStealthSafeAddressWithClient`](/src/predictStealthSafeAddress.ts): predicts the address of a stealth [Safe](https://safe.global/) based on a list of stealth address owners (EOAs) calling the Safe Proxy Factory Deployment contract
 - [`predictStealthSafeAddressWithBytecode`](/src/predictStealthSafeAddress.ts): predicts the address of a stealth [Safe](https://safe.global/) based on a list of stealth address owners (EOAs) simulating the CREATE2 call using the bytecode of the to-be deployed Safe Proxy
 
-An example of how to use these functions to recover stealth addresses based on a user's privateKey can be found in the [`example`](/src/example/example.ts) folder. 
+An example of how to use these functions to recover stealth addresses based on a user's private key can be found in the [`example`](/src/example/example.ts) folder. 
 
 Get Started
 -----------

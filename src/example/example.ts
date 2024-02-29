@@ -9,7 +9,7 @@ import {
 } from '..';
 
 /**
- * End-to-end example of how to generate a stealth Safe addresses based on the user's private key and the key generation message to be signed.
+ * End-to-end example of how to generate stealth Safe accounts based on the user's private key and the key generation message to be signed.
  *
  * @param userPrivateKey
  * @param keyGenerationMessage
