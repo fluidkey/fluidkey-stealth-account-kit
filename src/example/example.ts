@@ -6,7 +6,7 @@ import {
   generateStealthAddresses,
   predictStealthSafeAddressWithBytecode,
   predictStealthSafeAddressWithClient,
-} from '../src';
+} from '..';
 
 /**
  * End-to-end example of how to generate a stealth Safe addresses based on the user's private key and the key generation message to be signed.
@@ -24,26 +24,27 @@ export async function example({
   userPrivateKey,
   keyGenerationMessage,
   viewingPrivateKeyNodeNumber = 0,
-  startNonce = 0,
-  endNonce = 10,
+  startNonce = BigInt(0),
+  endNonce = BigInt(10),
   chainId = 1,
 }: {
   userPrivateKey: `0x${string}`;
   keyGenerationMessage: string;
   viewingPrivateKeyNodeNumber?: number;
-  startNonce?: number;
-  endNonce?: number;
+  startNonce?: bigint;
+  endNonce?: bigint;
   chainId?: number;
-}): Promise<{nonce: number; stealthSafeAddress: `0x${string}`}[]> {
+}): Promise<{nonce: bigint; stealthSafeAddress: `0x${string}`}[]> {
 
   // Create an empty array to store the results
-  const results: {nonce: number; stealthSafeAddress: `0x${string}`}[] = [];
+  const results: {nonce: bigint; stealthSafeAddress: `0x${string}`}[] = [];
 
   // Generate the signature from which the private keys will be derived
   const account = privateKeyToAccount(userPrivateKey);
   const signature = await account.signMessage({
     message: keyGenerationMessage,
   });
+
   // Generate the private keys from the signature
   const { spendingPrivateKey, viewingPrivateKey } = generateKeysFromSignature(signature);
 
@@ -69,8 +70,8 @@ export async function example({
       ephemeralPrivateKey,
     });
 
-    // Predict the corresponding stealth Safe address, both passing the client and using the CREATE2 option with
-    // bytecode, making sure the addresses generated are the same
+    // Predict the corresponding stealth Safe address, both passing the client and using
+    // the CREATE2 option with bytecode, making sure the addresses generated are the same
     console.log(`predicting Safe for signer ${stealthAddresses}`);
     const { stealthSafeAddress: stealthSafeAddressWithClient } = await predictStealthSafeAddressWithClient({
       chainId,
@@ -106,8 +107,8 @@ WARNING: Only sign this message within a trusted website or platform to avoid lo
 
 Secret: deccc7b0ba824d3b6f73c50c41935eabf5e7e10f5b0177732344899c60be0f16`,
     chainId: 11155111,
-    startNonce: 0,
-    endNonce: 30,
+    startNonce: BigInt(0),
+    endNonce: BigInt(30),
   });
 
   console.log(results);

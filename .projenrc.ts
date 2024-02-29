@@ -29,9 +29,6 @@ const project = new typescript.TypeScriptProject({
     'fast-check@3.15.0',
   ],
   tsconfig: {
-    exclude: [
-      'example/**/*',
-    ],
     compilerOptions: {
       // needed due to bug with viem types. In the future, try to remove it and run npx projen build to see if viem types are fixed
       skipLibCheck: true,
