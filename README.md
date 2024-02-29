@@ -1,3 +1,5 @@
+😶‍🌫️
+
 The Fluidkey Stealth Account Kit is an open source TypeScript library containing the core cryptographic functions used by [Fluidkey](https://fluidkey.com). It enables anyone to independently generate and recover stealth smart accounts and related funds.  
 
 A written companion explaining the usage of the kit in Fluidkey's processes can be found in the [technical walkthrough](https://docs.fluidkey.com/technical-walkthrough).
