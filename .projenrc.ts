@@ -1,7 +1,7 @@
 import { typescript } from 'projen';
 import { NpmAccess } from 'projen/lib/javascript';
 const project = new typescript.TypeScriptProject({
-  name: '@fluidkey/trust-kit',
+  name: '@fluidkey/stealth-account-kit',
   projenrcTs: true,
   depsUpgrade: false,
 
@@ -14,7 +14,7 @@ const project = new typescript.TypeScriptProject({
 
   // NPMjs Configuration
   authorOrganization: true,
-  packageName: '@fluidkey/trust-kit',
+  packageName: '@fluidkey/stealth-account-kit',
   releaseToNpm: true,
   npmAccess: NpmAccess.PUBLIC,
   defaultReleaseBranch: 'main',
