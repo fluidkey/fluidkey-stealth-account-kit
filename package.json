@@ -1,5 +1,5 @@
 {
-  "name": "@fluidkey/trust-kit",
+  "name": "@fluidkey/stealth-account-kit",
   "scripts": {
     "badges": "npx projen badges",
     "build": "npx projen build",
