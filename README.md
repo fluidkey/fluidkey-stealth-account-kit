@@ -18,6 +18,9 @@ The library is composed of the following functions:
 
 An example of how to use these functions to recover stealth accounts based on a user's private key can be found in the [`example`](/src/example/example.ts) folder. 
 
+> [!WARNING]
+> `generateKeysFromSignature` and `extractViewingPrivateKeyNode` should only be used client-side, as they expose the user's private keys.
+
 Get Started
 -----------
 To get started, install the package with your preferred package manager.
