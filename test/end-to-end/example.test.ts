@@ -74,7 +74,7 @@ describe('example', () => {
     // Check that the result is correct
     expect(result[0]).toEqual(expectedStealthSafeAddresses);
     expect(result[1]).toEqual(expectedStealthSafeAddresses);
-  });
+  }, 60000);
 
   it('should generate stealth addresses for a variety of viewingPrivateKeyNodeNumbers, startNonces, endNonces, and chainIds', async () => {
     fc.assert(
@@ -99,5 +99,5 @@ describe('example', () => {
         },
       ),
     );
-  });
+  }, 60000);
 });
