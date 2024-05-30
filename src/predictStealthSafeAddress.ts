@@ -37,7 +37,7 @@ export async function predictStealthSafeAddressWithClient({
   safeVersion,
 }: {
   threshold: number;
-  stealthAddresses: string[];
+  stealthAddresses: `0x${string}`[];
   chainId?: number;
   transport?: any;
   useDefaultAddress?: boolean;
@@ -120,7 +120,7 @@ export function predictStealthSafeAddressWithBytecode({
 }: {
   safeProxyBytecode: `0x${string}`;
   threshold: number;
-  stealthAddresses: string[];
+  stealthAddresses: `0x${string}`[];
   chainId?: number;
   useDefaultAddress?: boolean;
   safeVersion: SafeVersion;
@@ -186,7 +186,7 @@ function getSafeInitializerData ({
   safeVersion,
 }: {
   threshold: number;
-  stealthAddresses: string[];
+  stealthAddresses: `0x${string}`[];
   chainId: number;
   useDefaultAddress?: boolean;
   safeVersion: SafeVersion;

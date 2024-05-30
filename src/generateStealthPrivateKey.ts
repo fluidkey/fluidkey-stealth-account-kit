@@ -8,7 +8,7 @@ import { keccak256, pad, toHex } from 'viem';
    * @returns stealthPrivateKey
    */
 export function generateStealthPrivateKey(
-  { spendingPrivateKey, ephemeralPublicKey }: {spendingPrivateKey: string; ephemeralPublicKey: string}):
+  { spendingPrivateKey, ephemeralPublicKey }: {spendingPrivateKey: `0x${string}`; ephemeralPublicKey: `0x${string}`}):
   {stealthPrivateKey: `0x${string}`} {
   const sharedSecret = secp.getSharedSecret(
     spendingPrivateKey.replace('0x', ''),
