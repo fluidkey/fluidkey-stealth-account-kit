@@ -4,7 +4,7 @@ import {
   generateEphemeralPrivateKey,
   generateKeysFromSignature,
   generateStealthAddresses,
-  generateStealthPrivateSpendingKey,
+  generateStealthPrivateKey,
   predictStealthSafeAddressWithBytecode,
   predictStealthSafeAddressWithClient,
 } from '..';
@@ -39,10 +39,10 @@ export async function example({
   startNonce?: bigint;
   endNonce?: bigint;
   chainId?: number;
-}): Promise<{nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateSpendingKey: `0x${string}`}[][]> {
+}): Promise<{nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateKey: `0x${string}`}[][]> {
 
   // Create an empty array to store the results
-  const results: {nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateSpendingKey: `0x${string}`}[][] = [[], []];
+  const results: {nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateKey: `0x${string}`}[][] = [[], []];
 
   // Generate the signature from which the private keys will be derived
   const account = privateKeyToAccount(userPrivateKey);
@@ -93,14 +93,14 @@ export async function example({
     });
 
     // Generate the stealth private spending key controlling the stealth Safe
-    const { stealthPrivateSpendingKey } = generateStealthPrivateSpendingKey({
+    const { stealthPrivateKey } = generateStealthPrivateKey({
       spendingPrivateKey,
       ephemeralPublicKey: privateKeyToAccount(ephemeralPrivateKey).publicKey,
     });
 
     // Add the result to the results array
-    results[0].push({ nonce, stealthSafeAddress: stealthSafeAddressWithClient, stealthPrivateSpendingKey });
-    results[1].push({ nonce, stealthSafeAddress: stealthSafeAddressWithBytecode, stealthPrivateSpendingKey });
+    results[0].push({ nonce, stealthSafeAddress: stealthSafeAddressWithClient, stealthPrivateKey });
+    results[1].push({ nonce, stealthSafeAddress: stealthSafeAddressWithBytecode, stealthPrivateKey });
   }
 
   // Return the results
