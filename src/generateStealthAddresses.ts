@@ -12,11 +12,11 @@ export function generateStealthAddresses({
   spendingPublicKeys,
   ephemeralPrivateKey,
 }: {
-  spendingPublicKeys: string[];
+  spendingPublicKeys: `0x${string}`[];
   ephemeralPrivateKey: `0x${string}`;
-}): { stealthAddresses: string[] } {
+}): { stealthAddresses: `0x${string}`[] } {
   // Initialize an array to hold the stealth addresses
-  const stealthAddresses: string[] = [];
+  const stealthAddresses: `0x${string}`[] = [];
 
   // Iterate over each spending public key
   for (const spendingPublicKey of spendingPublicKeys) {
@@ -38,7 +38,7 @@ export function generateStealthAddresses({
 
     // Get the stealth address from the stealth public key
     const stealthAddress =
-      '0x' + keccak256(Buffer.from(stealthPublicKey.toHex(), 'hex').subarray(1)).slice(-40);
+      '0x' + keccak256(Buffer.from(stealthPublicKey.toHex(), 'hex').subarray(1)).slice(-40) as `0x${string}`;
 
     // Add the stealth address to the array of stealth addresses
     stealthAddresses.push(stealthAddress);

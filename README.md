@@ -13,13 +13,15 @@ The library is composed of the following functions:
 - [`extractViewingPrivateKeyNode`](/src/extractViewingPrivateKeyNode.ts): extracts a [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) node from a private viewing key
 - [`generateEphemeralPrivateKey`](/src/generateEphemeralPrivateKey.ts): generates an ephemeral private key based on the private viewing key node
 - [`generateStealthAddresses`](/src/generateStealthAddresses.ts): generates stealth addresses based on an ephemeral secret and a list of public spending keys
+- [`generateStealthPrivateKey`](/src/generateStealthPrivateKey.ts): generates the private key of the account controlling the stealth Safe
 - [`predictStealthSafeAddressWithClient`](/src/predictStealthSafeAddress.ts): predicts the address of a stealth [Safe](https://safe.global/) based on a list of stealth address owners (EOAs) calling the Safe Proxy Factory Deployment contract
 - [`predictStealthSafeAddressWithBytecode`](/src/predictStealthSafeAddress.ts): predicts the address of a stealth [Safe](https://safe.global/) based on a list of stealth address owners (EOAs) simulating the CREATE2 call using the bytecode of the to-be deployed Safe Proxy
+- [`generateFluidkeyMessage`](/src/utils/generateFluidkeyMessage.ts): generates the Fluidkey-specific key generation message
 
 An example of how to use these functions to recover stealth accounts based on a user's private key can be found in the [`example`](/src/example/example.ts) folder. 
 
 > [!WARNING]
-> `generateKeysFromSignature` and `extractViewingPrivateKeyNode` should only be used client-side, as they expose the user's private keys.
+> `generateKeysFromSignature`, `extractViewingPrivateKeyNode`, and `generateStealthPrivateKey` should only be used client-side, as they expose the user's private keys.
 
 Get Started
 -----------
@@ -40,13 +42,6 @@ import {
   generateStealthAddresses,
   predictStealthSafeAddressWithClient,
 } from '@fluidkey/stealth-account-kit'
-```
-
-If you want to run the example, you can clone this repository and use the following commands.
-
-```bash
-yarn install
-ts-node src/example/example.ts
 ```
 
 Fluidkey Parameters

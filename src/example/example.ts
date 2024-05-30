@@ -4,45 +4,51 @@ import {
   generateEphemeralPrivateKey,
   generateKeysFromSignature,
   generateStealthAddresses,
+  generateStealthPrivateKey,
   predictStealthSafeAddressWithBytecode,
   predictStealthSafeAddressWithClient,
 } from '..';
+import { generateFluidkeyMessage } from '../utils/generateFluidkeyMessage';
 
 /**
  * End-to-end example of how to generate stealth Safe accounts based on the user's private key and the key generation message to be signed.
  *
  * @param userPrivateKey
- * @param keyGenerationMessage
+ * @param userPin
+ * @param userAddress
  * @param viewingPrivateKeyNodeNumber
  * @param startNonce
  * @param endNonce
  * @param chainId
- * @returns a list of objects containing the nonce and the corresponding stealth Safe address
+ * @returns two lists of objects containing the nonce, the corresponding stealth Safe address, and the private key controlling the stealth Safe at that address
  */
 
 export async function example({
   userPrivateKey,
-  keyGenerationMessage,
+  userPin,
+  userAddress,
   viewingPrivateKeyNodeNumber = 0,
   startNonce = BigInt(0),
   endNonce = BigInt(10),
-  chainId = 1,
+  chainId = 0,
 }: {
   userPrivateKey: `0x${string}`;
-  keyGenerationMessage: string;
+  userPin: string;
+  userAddress: string;
   viewingPrivateKeyNodeNumber?: number;
   startNonce?: bigint;
   endNonce?: bigint;
   chainId?: number;
-}): Promise<{nonce: bigint; stealthSafeAddress: `0x${string}`}[]> {
+}): Promise<{nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateKey: `0x${string}`}[][]> {
 
   // Create an empty array to store the results
-  const results: {nonce: bigint; stealthSafeAddress: `0x${string}`}[] = [];
+  const results: {nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateKey: `0x${string}`}[][] = [[], []];
 
   // Generate the signature from which the private keys will be derived
   const account = privateKeyToAccount(userPrivateKey);
+  const { message } = generateFluidkeyMessage({ pin: userPin, address: userAddress });
   const signature = await account.signMessage({
-    message: keyGenerationMessage,
+    message,
   });
 
   // Generate the private keys from the signature
@@ -72,7 +78,6 @@ export async function example({
 
     // Predict the corresponding stealth Safe address, both passing the client and using
     // the CREATE2 option with bytecode, making sure the addresses generated are the same
-    console.log(`predicting Safe for signer ${stealthAddresses}`);
     const { stealthSafeAddress: stealthSafeAddressWithClient } = await predictStealthSafeAddressWithClient({
       threshold: 1,
       stealthAddresses,
@@ -87,31 +92,17 @@ export async function example({
       useDefaultAddress: true,
     });
 
-    console.log('  - stealthSafeAddressWithClient  ', stealthSafeAddressWithClient);
-    console.log('  - stealthSafeAddressWithBytecode', stealthSafeAddressWithBytecode);
+    // Generate the stealth private spending key controlling the stealth Safe
+    const { stealthPrivateKey } = generateStealthPrivateKey({
+      spendingPrivateKey,
+      ephemeralPublicKey: privateKeyToAccount(ephemeralPrivateKey).publicKey,
+    });
 
     // Add the result to the results array
-    results.push({ nonce, stealthSafeAddress: stealthSafeAddressWithBytecode });
+    results[0].push({ nonce, stealthSafeAddress: stealthSafeAddressWithClient, stealthPrivateKey });
+    results[1].push({ nonce, stealthSafeAddress: stealthSafeAddressWithBytecode, stealthPrivateKey });
   }
 
   // Return the results
   return results;
 }
-
-async function runExample() {
-  const results = await example({
-    userPrivateKey: '0x8575420a19052cf9bbe9ef4ac755a9abaaefa3f1f2e35d14c04f38829182e9ba',
-    keyGenerationMessage: `Sign this message to generate your Fluidkey private payment keys.
-
-WARNING: Only sign this message within a trusted website or platform to avoid loss of funds.
-
-Secret: deccc7b0ba824d3b6f73c50c41935eabf5e7e10f5b0177732344899c60be0f16`,
-    chainId: 0,
-    startNonce: BigInt(0),
-    endNonce: BigInt(30),
-  });
-
-  console.log(results);
-}
-
-void runExample();

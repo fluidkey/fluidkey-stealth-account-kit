@@ -5,7 +5,7 @@ describe('predictStealthSafeAddressWithClient', () => {
   it('should predict the correct stealth safe address', async () => {
     const chainId = 1;
     const threshold = 3;
-    const stealthAddresses = [
+    const stealthAddresses: `0x${string}`[] = [
       '0xb9e7de28c2e6c8f3c29fc0e061485a34c5864614',
       '0x5a655820821bf7af7b23566b34ce0ccbd9c9a37f',
       '0x74c19105f358bab85f8e9fda9202a1326a714d89',
@@ -25,7 +25,7 @@ describe('predictStealthSafeAddressWithClient', () => {
 
   it('should use mainnet if useDefaultChain is passed', async () => {
     const threshold = 3;
-    const stealthAddresses = [
+    const stealthAddresses: `0x${string}`[] = [
       '0xb9e7de28c2e6c8f3c29fc0e061485a34c5864614',
       '0x5a655820821bf7af7b23566b34ce0ccbd9c9a37f',
       '0x74c19105f358bab85f8e9fda9202a1326a714d89',
@@ -52,7 +52,7 @@ describe('predictStealthSafeAddressWithClient', () => {
   it('should fail if the chain is not part of the safe deployments', async () => {
     const chainId = 123456789;
     const threshold = 3;
-    const stealthAddresses = [
+    const stealthAddresses: `0x${string}`[] = [
       '0xb9e7de28c2e6c8f3c29fc0e061485a34c5864614',
       '0x5a655820821bf7af7b23566b34ce0ccbd9c9a37f',
       '0x74c19105f358bab85f8e9fda9202a1326a714d89',
@@ -73,8 +73,8 @@ describe('predictStealthSafeAddressWithClient', () => {
     fc.assert(
       fc.asyncProperty(
         fc.constantFrom(1, 5, 10, 8453, 42161),
-        fc.array(fc.hexaString({ minLength: 40, maxLength: 40 }).map(s => `0x${s}`), { minLength: 1, maxLength: 10 }),
-        async (chainId, stealthAddresses) => {
+        fc.array(fc.hexaString({ minLength: 40, maxLength: 40 }).map(s => `0x${s}` as `0x${string}`), { minLength: 1, maxLength: 10 }),
+        async (chainId, stealthAddresses: `0x${string}`[]) => {
           const threshold = Math.floor(Math.random() * stealthAddresses.length) + 1;
           const result = await predictStealthSafeAddressWithClient({
             chainId,
@@ -93,7 +93,7 @@ describe('predictStealthSafeAddressWithClient', () => {
 
   it('should fail if both the chainId and the useDefaultAddress values are not passed', async () => {
     const threshold = 3;
-    const stealthAddresses = [
+    const stealthAddresses: `0x${string}`[] = [
       '0xb9e7de28c2e6c8f3c29fc0e061485a34c5864614',
       '0x5a655820821bf7af7b23566b34ce0ccbd9c9a37f',
       '0x74c19105f358bab85f8e9fda9202a1326a714d89',
@@ -117,7 +117,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
 
   it('should predict the correct stealth safe address', async () => {
     const threshold = 3;
-    const stealthAddresses = [
+    const stealthAddresses: `0x${string}`[] = [
       '0xb9e7de28c2e6c8f3c29fc0e061485a34c5864614',
       '0x5a655820821bf7af7b23566b34ce0ccbd9c9a37f',
       '0x74c19105f358bab85f8e9fda9202a1326a714d89',
@@ -138,7 +138,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
 
   it('should use mainnet if useDefaultChain is passed', async () => {
     const threshold = 3;
-    const stealthAddresses = [
+    const stealthAddresses: `0x${string}`[] = [
       '0xb9e7de28c2e6c8f3c29fc0e061485a34c5864614',
       '0x5a655820821bf7af7b23566b34ce0ccbd9c9a37f',
       '0x74c19105f358bab85f8e9fda9202a1326a714d89',
@@ -167,7 +167,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
   it('should fail if the chain is not part of the safe deployments', async () => {
     const chainId = 123456789;
     const threshold = 3;
-    const stealthAddresses = [
+    const stealthAddresses: `0x${string}`[] = [
       '0xb9e7de28c2e6c8f3c29fc0e061485a34c5864614',
       '0x5a655820821bf7af7b23566b34ce0ccbd9c9a37f',
       '0x74c19105f358bab85f8e9fda9202a1326a714d89',
@@ -187,7 +187,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
 
   it('should fail if not the chainId nor the useDefaultAddress values are there', async () => {
     const threshold = 3;
-    const stealthAddresses = [
+    const stealthAddresses: `0x${string}`[] = [
       '0xb9e7de28c2e6c8f3c29fc0e061485a34c5864614',
       '0x5a655820821bf7af7b23566b34ce0ccbd9c9a37f',
       '0x74c19105f358bab85f8e9fda9202a1326a714d89',
@@ -208,7 +208,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
     fc.assert(
       fc.asyncProperty(
         fc.constantFrom(1, 5, 10, 8453, 42161),
-        fc.array(fc.hexaString({ minLength: 40, maxLength: 40 }).map(s => `0x${s}`), { minLength: 1, maxLength: 10 }),
+        fc.array(fc.hexaString({ minLength: 40, maxLength: 40 }).map(s => `0x${s}` as `0x${string}`), { minLength: 1, maxLength: 10 }),
         async (chainId, stealthAddresses) => {
           const threshold = Math.floor(Math.random() * stealthAddresses.length) + 1;
           const result = predictStealthSafeAddressWithBytecode({
@@ -229,7 +229,7 @@ describe('predictStealthSafeAddressWithBytecode', () => {
 
   it('should fail if the chainId is not passed and useDefaultAddress is false', async () => {
     const threshold = 1;
-    const stealthAddresses = [
+    const stealthAddresses: `0x${string}`[] = [
       '0xb9e7de28c2e6c8f3c29fc0e061485a34c5864614',
     ];
 
