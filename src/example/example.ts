@@ -4,6 +4,7 @@ import {
   generateEphemeralPrivateKey,
   generateKeysFromSignature,
   generateStealthAddresses,
+  generateStealthPrivateSpendingKey,
   predictStealthSafeAddressWithBytecode,
   predictStealthSafeAddressWithClient,
 } from '..';
@@ -19,7 +20,7 @@ import { generateFluidkeyMessage } from '../utils/generateFluidkeyMessage';
  * @param startNonce
  * @param endNonce
  * @param chainId
- * @returns two lists of objects containing the nonce and the corresponding stealth Safe address
+ * @returns two lists of objects containing the nonce, the corresponding stealth Safe address, and the private key controlling the stealth Safe at that address
  */
 
 export async function example({
@@ -38,10 +39,10 @@ export async function example({
   startNonce?: bigint;
   endNonce?: bigint;
   chainId?: number;
-}): Promise<{nonce: bigint; stealthSafeAddress: `0x${string}`}[][]> {
+}): Promise<{nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateSpendingKey: `0x${string}`}[][]> {
 
   // Create an empty array to store the results
-  const results: {nonce: bigint; stealthSafeAddress: `0x${string}`}[][] = [[], []];
+  const results: {nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateSpendingKey: `0x${string}`}[][] = [[], []];
 
   // Generate the signature from which the private keys will be derived
   const account = privateKeyToAccount(userPrivateKey);
@@ -91,9 +92,15 @@ export async function example({
       useDefaultAddress: true,
     });
 
+    // Generate the stealth private spending key controlling the stealth Safe
+    const { stealthPrivateSpendingKey } = generateStealthPrivateSpendingKey({
+      spendingPrivateKey,
+      ephemeralPublicKey: privateKeyToAccount(ephemeralPrivateKey).publicKey,
+    });
+
     // Add the result to the results array
-    results[0].push({ nonce, stealthSafeAddress: stealthSafeAddressWithClient });
-    results[1].push({ nonce, stealthSafeAddress: stealthSafeAddressWithBytecode });
+    results[0].push({ nonce, stealthSafeAddress: stealthSafeAddressWithClient, stealthPrivateSpendingKey });
+    results[1].push({ nonce, stealthSafeAddress: stealthSafeAddressWithBytecode, stealthPrivateSpendingKey });
   }
 
   // Return the results

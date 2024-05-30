@@ -5,9 +5,11 @@ import { keccak256, pad, toHex } from 'viem';
    * Given the user's private spending key and an ephemeral public key, generate the private key of the stealth address
    * @param spendingPrivateKey
    * @param ephemeralPublicKey
-   * @returns stealthSpendingPrivateKey
+   * @returns stealthPrivateSpendingKey
    */
-export function generateStealthPrivateKey(spendingPrivateKey: string, ephemeralPublicKey: string): {stealthSpendingPrivateKey: `0x${string}`} {
+export function generateStealthPrivateSpendingKey(
+  { spendingPrivateKey, ephemeralPublicKey }: {spendingPrivateKey: string; ephemeralPublicKey: string}):
+  {stealthPrivateSpendingKey: `0x${string}`} {
   const sharedSecret = secp.getSharedSecret(
     spendingPrivateKey.replace('0x', ''),
     ephemeralPublicKey.replace('0x', ''),
@@ -15,5 +17,5 @@ export function generateStealthPrivateKey(spendingPrivateKey: string, ephemeralP
   );
   const hashedSharedSecret = keccak256(sharedSecret.slice(1));
   const privateKeyBigInt = (BigInt(spendingPrivateKey) * BigInt(hashedSharedSecret)) % secp.CURVE.n;
-  return { stealthSpendingPrivateKey: pad(toHex(privateKeyBigInt)) };
+  return { stealthPrivateSpendingKey: pad(toHex(privateKeyBigInt)) };
 };
