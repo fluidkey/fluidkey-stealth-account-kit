@@ -11,6 +11,7 @@ const project = new typescript.TypeScriptProject({
   authorEmail: 'it@fluidkey.com',
   gitignore: ['.idea/', '.env', '.yalc'],
   license: 'MIT',
+  majorVersion: 1,
 
   // NPMjs Configuration
   authorOrganization: true,

@@ -56,6 +56,11 @@ const useDefaultAddress = true
 const threshold = 1
 ```
 
+Audits
+------
+
+The Fluidkey Stealth Account Kit has been audited by [Dedaub](https://dedaub.com) in May 2024. You can find the full audit report [here](/audits/Fluidkey%20Stealth%20Account%20Kit%20-%20May%2024,%202024.pdf).
+
 Dependencies
 ------------
 - [viem](https://github.com/wevm/viem) and its dependencies, specifically:
