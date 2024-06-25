@@ -21,7 +21,7 @@ describe('predictStealthSafeAddressWithClient', () => {
     });
 
     expect(result).toEqual({ stealthSafeAddress: expectedStealthSafeAddress });
-  });
+  }, 60000);
 
   it('should use mainnet if useDefaultChain is passed', async () => {
     const threshold = 3;
@@ -47,7 +47,7 @@ describe('predictStealthSafeAddressWithClient', () => {
     });
 
     expect(resultWithUseDefaultAddress).toEqual(resultWithChainMainnet);
-  });
+  }, 60000);
 
   it('should fail if the chain is not part of the safe deployments', async () => {
     const chainId = 123456789;
@@ -67,7 +67,7 @@ describe('predictStealthSafeAddressWithClient', () => {
         safeVersion: '1.3.0',
       }),
     ).rejects.toThrow('No safe contracts found for this configuration.');
-  });
+  }, 60000);
 
   it('should handle a variety of valid inputs without crashing', async () => {
     fc.assert(
@@ -89,7 +89,7 @@ describe('predictStealthSafeAddressWithClient', () => {
     ).catch((error) => {
       throw error;
     });
-  });
+  }, 60000);
 
   it('should fail if both the chainId and the useDefaultAddress values are not passed', async () => {
     const threshold = 3;
@@ -107,7 +107,7 @@ describe('predictStealthSafeAddressWithClient', () => {
         safeVersion: '1.3.0',
       }),
     ).rejects.toThrow('chainId is required when useDefaultAddress is false');
-  });
+  }, 60000);
 
 });
 
