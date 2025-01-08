@@ -1,5 +1,6 @@
 import * as fc from 'fast-check';
 import { predictStealthSafeAddressWithBytecode, predictStealthSafeAddressWithClient } from '../src';
+import { InitializerExtraFields } from '../src/predictStealthSafeAddressTypes';
 
 describe('predictStealthSafeAddressWithClient', () => {
   it('should predict the correct stealth safe address', async () => {
@@ -108,6 +109,34 @@ describe('predictStealthSafeAddressWithClient', () => {
       }),
     ).rejects.toThrow('chainId is required when useDefaultAddress is false');
   }, 60000);
+
+  it('should predict correctly with initializerExtraFields set', async () => {
+    const chainId = 1;
+    const threshold = 2;
+    const stealthAddresses: `0x${string}`[] = [
+      '0xb9e7de28c2e6c8f3c29fc0e061485a34c5864614',
+      '0x5a655820821bf7af7b23566b34ce0ccbd9c9a37f',
+    ];
+    const initializerExtraFields: InitializerExtraFields = {
+      to: '0x1111111111111111111111111111111111111111',
+      data: '0xdeadbeef',
+      fallbackHandler: '0x2222222222222222222222222222222222222222',
+      paymentToken: '0x3333333333333333333333333333333333333333',
+      payment: '1000000000000000000',
+      paymentReceiver: '0x4444444444444444444444444444444444444444',
+    };
+    const expectedStealthSafeAddress = '0xe28c58e52697a8b93f7d714aeadfc3ad156c7237';
+
+    const result = await predictStealthSafeAddressWithClient({
+      chainId,
+      threshold,
+      stealthAddresses,
+      safeVersion: '1.3.0',
+      initializerExtraFields,
+    });
+
+    expect(result).toEqual({ stealthSafeAddress: expectedStealthSafeAddress });
+  });
 
 });
 
@@ -243,4 +272,33 @@ describe('predictStealthSafeAddressWithBytecode', () => {
       });
     }).toThrow('chainId is required when useDefaultAddress is false');
   });
+
+  it('should predict correctly with initializerExtraFields set', async () => {
+    const threshold = 2;
+    const stealthAddresses: `0x${string}`[] = [
+      '0xb9e7de28c2e6c8f3c29fc0e061485a34c5864614',
+      '0x5a655820821bf7af7b23566b34ce0ccbd9c9a37f',
+    ];
+    const initializerExtraFields: InitializerExtraFields = {
+      to: '0x1111111111111111111111111111111111111111',
+      data: '0xdeadbeef',
+      fallbackHandler: '0x2222222222222222222222222222222222222222',
+      paymentToken: '0x3333333333333333333333333333333333333333',
+      payment: '1000000000000000000',
+      paymentReceiver: '0x4444444444444444444444444444444444444444',
+    };
+    const expectedStealthSafeAddress = '0xe28c58e52697a8b93f7d714aeadfc3ad156c7237';
+
+    const result = predictStealthSafeAddressWithBytecode({
+      threshold,
+      stealthAddresses,
+      safeVersion: '1.3.0',
+      safeProxyBytecode,
+      useDefaultAddress: true,
+      initializerExtraFields,
+    });
+
+    expect(result).toEqual({ stealthSafeAddress: expectedStealthSafeAddress });
+  });
+
 });

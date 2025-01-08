@@ -15,7 +15,7 @@ import {
   toBytes,
 } from 'viem';
 import * as chains from 'viem/chains';
-import { SafeVersion } from './predictStealthSafeAddressTypes';
+import { InitializerExtraFields, SafeVersion } from './predictStealthSafeAddressTypes';
 
 /**
  * Using Viem transaction simulation, predict a new Safe address using the parameters passed in input.
@@ -26,6 +26,7 @@ import { SafeVersion } from './predictStealthSafeAddressTypes';
  * @param chainId {number} (optional) the chainId of the network where the Safe will be deployed
  * @param transport (optional) a custom viem transport to use for the simulation
  * @param safeVersion {SafeVersion} the Safe version to use
+ * @param initializerExtraFields {InitializerExtraFields | undefined} (optional) the extra fields that can be optionally set in the initializer
  * @return Promise<{ stealthSafeAddress }> the predicted Safe address (not deployed)
  */
 export async function predictStealthSafeAddressWithClient({
@@ -35,6 +36,7 @@ export async function predictStealthSafeAddressWithClient({
   transport,
   useDefaultAddress,
   safeVersion,
+  initializerExtraFields,
 }: {
   threshold: number;
   stealthAddresses: `0x${string}`[];
@@ -42,6 +44,7 @@ export async function predictStealthSafeAddressWithClient({
   transport?: any;
   useDefaultAddress?: boolean;
   safeVersion: SafeVersion;
+  initializerExtraFields?: InitializerExtraFields;
 }): Promise<{ stealthSafeAddress: `0x${string}` }> {
 
   // if useDefaultAddress is false, chainId is required
@@ -60,6 +63,7 @@ export async function predictStealthSafeAddressWithClient({
     stealthAddresses,
     useDefaultAddress,
     safeVersion,
+    initializerExtraFields,
   });
 
   const safeSingletonAddress = useDefaultAddress ? safeSingleton.defaultAddress : safeSingleton.networkAddresses[chainId.toString()];
@@ -108,6 +112,7 @@ export async function predictStealthSafeAddressWithClient({
  * @param stealthAddresses {string[]} the stealth addresses controlling the Safe
  * @param chainId {number} (optional) the chainId of the network where the Safe will be deployed
  * @param useDefaultAddress {boolean} (optional) if true, the Safe default address will be used - see DefaultAddress inside https://github.com/safe-global/safe-deployments
+ * @param initializerExtraFields {InitializerExtraFields | undefined} (optional) the extra fields that can be optionally set in the initializer
  * @return Promise<{ stealthSafeAddress }> the predicted Safe address (not deployed)
  */
 export function predictStealthSafeAddressWithBytecode({
@@ -117,6 +122,7 @@ export function predictStealthSafeAddressWithBytecode({
   stealthAddresses,
   useDefaultAddress,
   safeVersion,
+  initializerExtraFields,
 }: {
   safeProxyBytecode: `0x${string}`;
   threshold: number;
@@ -124,6 +130,7 @@ export function predictStealthSafeAddressWithBytecode({
   chainId?: number;
   useDefaultAddress?: boolean;
   safeVersion: SafeVersion;
+  initializerExtraFields?: InitializerExtraFields;
 }): { stealthSafeAddress: `0x${string}` } {
   // if useDefaultAddress is false, chainId is required
   if (!useDefaultAddress) {
@@ -141,6 +148,7 @@ export function predictStealthSafeAddressWithBytecode({
     stealthAddresses,
     useDefaultAddress,
     safeVersion,
+    initializerExtraFields,
   });
 
   const safeSingletonAddress = useDefaultAddress ? safeSingleton.defaultAddress : safeSingleton.networkAddresses[chainId.toString()];
@@ -177,6 +185,7 @@ export function predictStealthSafeAddressWithBytecode({
  * @param chainId {number} (optional) the chainId of the network where the Safe will be deployed
  * @param useDefaultAddress {boolean} (optional) if true, the Safe default address will be used - see DefaultAddress inside https://github.com/safe-global/safe-deployments
  * @param safeVersion {SafeVersion} the Safe version to use
+ * @param initializerExtraFields {InitializerExtraFields | undefined} (optional) the extra fields that can be optionally set in the initializer
  */
 function getSafeInitializerData ({
   chainId,
@@ -184,12 +193,14 @@ function getSafeInitializerData ({
   stealthAddresses,
   useDefaultAddress,
   safeVersion,
+  initializerExtraFields,
 }: {
   threshold: number;
   stealthAddresses: `0x${string}`[];
   chainId: number;
   useDefaultAddress?: boolean;
   safeVersion: SafeVersion;
+  initializerExtraFields?: InitializerExtraFields;
 }): {
     initializer: `0x${string}`;
     proxyFactory: SingletonDeployment;
@@ -229,12 +240,12 @@ function getSafeInitializerData ({
     args: [
       stealthAddresses,
       threshold,
-      ZERO_ADDRESS,
-      '0x',
-      fallbackHandlerAddress,
-      ZERO_ADDRESS,
-      0,
-      ZERO_ADDRESS,
+      !!initializerExtraFields?.to ? initializerExtraFields.to : ZERO_ADDRESS,
+      !!initializerExtraFields?.data ? initializerExtraFields.data : '0x',
+      !!initializerExtraFields?.fallbackHandler ? initializerExtraFields.fallbackHandler : fallbackHandlerAddress,
+      !!initializerExtraFields?.paymentToken ? initializerExtraFields.paymentToken : ZERO_ADDRESS,
+      !!initializerExtraFields?.payment ? initializerExtraFields.payment : '0',
+      !!initializerExtraFields?.paymentReceiver ? initializerExtraFields.paymentReceiver : ZERO_ADDRESS,
     ],
   });
 
