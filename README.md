@@ -55,6 +55,7 @@ const safeVersion = '1.3.0'
 const useDefaultAddress = true
 const threshold = 1
 ```
+For users who are using the auto-earn feature, the initdata can be found [here](/initdata/stealth-account-initdata.md).
 
 Audits
 ------
