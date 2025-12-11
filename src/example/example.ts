@@ -39,10 +39,10 @@ export async function example({
   startNonce?: bigint;
   endNonce?: bigint;
   chainId?: number;
-}): Promise<{nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateKey: `0x${string}`}[][]> {
+}): Promise<{ nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateKey: `0x${string}` }[][]> {
 
   // Create an empty array to store the results
-  const results: {nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateKey: `0x${string}`}[][] = [[], []];
+  const results: { nonce: bigint; stealthSafeAddress: `0x${string}`; stealthPrivateKey: `0x${string}` }[][] = [[], []];
 
   // Generate the signature from which the private keys will be derived
   const account = privateKeyToAccount(userPrivateKey);

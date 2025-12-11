@@ -1,5 +1,5 @@
 import { typescript } from 'projen';
-import { NpmAccess } from 'projen/lib/javascript';
+import { NodePackageManager, NpmAccess, YarnNodeLinker } from 'projen/lib/javascript';
 const project = new typescript.TypeScriptProject({
   name: '@fluidkey/stealth-account-kit',
   projenrcTs: true,
@@ -9,16 +9,50 @@ const project = new typescript.TypeScriptProject({
   github: true,
   authorName: 'Fluid Privacy SA',
   authorEmail: 'it@fluidkey.com',
-  gitignore: ['.idea/', '.env', '.yalc'],
+  gitignore: ['.idea/', '.env', '.yalc', '.history'],
   license: 'MIT',
   majorVersion: 1,
+
+  // Package Manager Configuration
+  packageManager: NodePackageManager.YARN_BERRY,
+  yarnBerryOptions: {
+    version: '4.9.2',
+    yarnRcOptions: {
+      nodeLinker: YarnNodeLinker.NODE_MODULES,
+      supportedArchitectures: {
+        cpu: ['x64', 'arm64'],
+        os: ['linux', 'darwin'],
+        libc: ['glibc', 'musl'],
+      },
+    },
+  },
 
   // NPMjs Configuration
   authorOrganization: true,
   packageName: '@fluidkey/stealth-account-kit',
   releaseToNpm: true,
+  npmTrustedPublishing: true, // Enable npm Trusted Publisher (OIDC)
   npmAccess: NpmAccess.PUBLIC,
   defaultReleaseBranch: 'main',
+
+  // GitHub workflow configuration
+  githubOptions: {
+    workflows: true,
+    pullRequestLint: true,
+  },
+  workflowNodeVersion: '24', // Node 24 includes npm 11+ required for Trusted Publishing
+
+  // Add custom workflow steps
+  workflowBootstrapSteps: [
+    {
+      name: 'Enable Corepack',
+      run: 'corepack enable',
+    },
+    {
+      name: 'Set up Yarn',
+      run: 'corepack prepare yarn@4.9.2 --activate',
+    },
+  ],
 
   deps: [
     '@noble/secp256k1@1.7.1',

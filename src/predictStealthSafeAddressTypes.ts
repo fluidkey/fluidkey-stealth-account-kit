@@ -13,4 +13,4 @@ export type InitializerExtraFields = {
   /** The payment amount. Set as string to avoid losing precision on large numbers. */
   payment?: string;
   paymentReceiver?: `0x${string}`;
-}
+};
