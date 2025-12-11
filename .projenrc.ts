@@ -9,7 +9,7 @@ const project = new typescript.TypeScriptProject({
   github: true,
   authorName: 'Fluid Privacy SA',
   authorEmail: 'it@fluidkey.com',
-  gitignore: ['.idea/', '.env', '.yalc', '.history'],
+  gitignore: ['.idea/', '.env', '.yalc', '.history', '.yarn/install-state.gz'],
   license: 'MIT',
   majorVersion: 1,
 

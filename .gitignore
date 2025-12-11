@@ -42,6 +42,7 @@ jspm_packages/
 .env
 .yalc
 .history
+.yarn/install-state.gz
 /test-reports/
 junit.xml
 /coverage/
