@@ -85,9 +85,11 @@ export async function predictStealthSafeAddressWithClient({
   }
 
   // Create a viem client to simulate the transaction
+  // Use a reliable public RPC endpoint if no transport is provided
+  const rpcUrl = transport || 'https://eth.llamarpc.com';
   const client = createPublicClient({
     chain: selectedChain,
-    transport: http(transport),
+    transport: http(rpcUrl),
   });
 
   // Simulate the transaction
