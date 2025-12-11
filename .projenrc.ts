@@ -9,6 +9,7 @@ const project = new typescript.TypeScriptProject({
   github: true,
   authorName: 'Fluid Privacy SA',
   authorEmail: 'it@fluidkey.com',
+  repository: 'https://github.com/fluidkey/fluidkey-stealth-account-kit.git',
   gitignore: ['.idea/', '.env', '.yalc', '.history', '.yarn/install-state.gz'],
   license: 'MIT',
   majorVersion: 1,

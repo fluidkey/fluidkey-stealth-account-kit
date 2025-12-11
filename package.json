@@ -1,5 +1,9 @@
 {
   "name": "@fluidkey/stealth-account-kit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fluidkey/fluidkey-stealth-account-kit.git"
+  },
   "scripts": {
     "badges": "npx projen badges",
     "build": "npx projen build",
